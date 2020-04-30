@@ -23,7 +23,7 @@ export enum ENUM_IT_STRINGS {
 
 export enum ENUM_EN_STRINGS {
     privacyNotice = "Please take a moment to review our policy prior to answering the survey questions",
-    startButtonText = "start",
+    startButtonText = "Start",
     sendButtonText = "send",
     skipButtonText = "skip",
     restartButtonText = "Restart",

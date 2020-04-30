@@ -292,11 +292,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     if (this.conv_id != null) {
       endpoint = endpoint + '?conversationId=' + this.conv_id;
     }
-    if (this.defaultLanguage.tag != this.languageValue.tag) {
-      endpoint = endpoint + '&lang=' + this.languageValue.tag;
-    } else {
-      endpoint = endpoint + '&lang=default';
-    }
+    
+    endpoint = endpoint + '&lang=' + this.languageValue.tag;
+    
 
     if (this.userId != null && this.userId != "") {
       endpoint = endpoint + '&userId=' + this.userId;
@@ -389,11 +387,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.postData["answerType"] = this.block.block_subtype;
       this.postData["blockId"] = this.block.block_id;
       this.postData["redo"] = "false";
-      if (this.defaultLanguage.tag != this.languageValue.tag) {
-        this.postData["lang"] = this.languageValue.tag;
-      } else {
-        this.postData["lang"] = "default";
-      }
+      this.postData["lang"] = this.languageValue.tag;
+      
 
 
       if (checkboxAnswers == undefined) {
