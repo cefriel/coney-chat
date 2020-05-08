@@ -11,6 +11,7 @@ export class AnswerTextComponent implements OnInit {
   @Input() answerType: string;
 
   showSkip = true;
+  showSend = false;
   inputText="";
 
   constructor() {
@@ -21,7 +22,7 @@ export class AnswerTextComponent implements OnInit {
   }
 
   callParent() {
-    if (this.inputText != "") {
+    if (this.inputText != "" && this.inputText.length > 5) {
       this.inputText.toString().trim();
       this.sendAnswer.emit(this.inputText.toString());
       this.inputText = "";
@@ -33,11 +34,19 @@ export class AnswerTextComponent implements OnInit {
   }
 
   edited() {
+    
     if (this.inputText == "") {
       this.showSkip = true;
     } else {
       this.showSkip = false;
     }
+    /*
+   if (this.inputText.length > 5) {
+    this.showSend = true;
+  } else {
+    this.showSend = false;
+  }*/
+
   }
 
 }

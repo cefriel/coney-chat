@@ -86,7 +86,7 @@
         <div id="answer-comp" class="row">
           <div id="answer-comp-internal">
             <div class="row m-0" id="btnDiv" style="justify-content: center;">
-              <button mat-raised-button color="primary" id="endButton" (click)="showEndScreen(true)">The end 👍</button>
+              <button mat-raised-button color="primary" id="endButton" (click)="showEndScreen(true)">{{endScreenButtonText}}</button>
             </div>
           </div>
         </div>
@@ -127,7 +127,9 @@
   <div id="chat-intro" class="container text text-center justify-content-center p-4" style="padding: 1.5rem!important;">
     <div id="chat-intro-container" class="p-4">
       <img src="./assets/messages.svg" style="height: 80px; width: auto;" class="mb-4">
+      <!--<img src="./assets/cefriel_logo.svg" style="height: 80px; width: auto;" class="my-4">-->
       <h4>{{currentConversationTitle}}</h4>
+      <h5 *ngIf="projectName != null && projectName != ''">{{projectName}}</h5>
       <br>
       <p style="font-size: 80%;">
         {{privacyNotice}}

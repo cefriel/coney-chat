@@ -23,3 +23,12 @@
     flex-flow: column;
     display:flex;
 }
+
+#cb-container{
+    overflow-y: scroll; max-height: 35vh; justify-content: center;
+    display: flex;  -ms-overflow-style: none;
+}
+
+#cb-container::-webkit-scrollbar{
+    display: none;
+}

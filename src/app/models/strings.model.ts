@@ -28,7 +28,7 @@ export enum ENUM_EN_STRINGS {
     skipButtonText = "skip",
     restartButtonText = "Restart",
     continueButtonText = "Continue",
-    endButtonText = "Done",
+    endButtonText = "Close",
     endScreenButtonText = "Show Chat",
     doneConversation = "It looks like we were already having this conversation...",
     endScreenText = "You can now close this page 😊",

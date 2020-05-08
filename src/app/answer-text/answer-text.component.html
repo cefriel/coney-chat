@@ -30,11 +30,23 @@
 
   </div>
   <div class="col-3"  id="textAreaSendContainer">
+
     <button mat-button color="accent" class="btn-send-answer" *ngIf="showSkip; else sendBtnEnabled" type="submit" (click)="skipQuestion()">skip</button>
     <ng-template #sendBtnEnabled>
       <button mat-button color="accent" class="btn-send-answer" (click)="callParent()" type="submit">
         <img src="./assets/send.svg" height="25px">
       </button>
     </ng-template>
+
+    <!--no skip
+    <button *ngIf="showSend; else sendBtnDisabled"  mat-button color="accent" class="btn-send-answer" (click)="callParent()" type="submit">
+      <img src="./assets/send.svg" height="25px">
+    </button>
+    <ng-template #sendBtnDisabled>
+      <button mat-button color="accent" class="btn-send-answer" type="submit" disabled>
+        <img src="./assets/send_disabled.svg" height="25px">
+      </button>
+    </ng-template>
+  -->
   </div>
 </div>

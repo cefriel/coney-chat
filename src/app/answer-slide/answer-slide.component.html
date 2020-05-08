@@ -7,7 +7,7 @@
   <div id="answer-comp-internal">
     <div class="col-12 mt-3 mb-3">
       <mat-slider (keyup.enter)="callParent()" style="width:100%; margin-top:0px;" [max]="max" [min]="min" [step]="step" [(ngModel)]="value"
-        [value]="value" (change)="changedSlide()">
+        [value]="value" (change)="changedSlide()" (click)="changedSlide()">
       </mat-slider>
       <div style="float: left; margin-top: -5px;">
           <p class="minmax-val" id="value-min">{{minLabel}}</p>

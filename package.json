@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration=production --base-href=/coney/chat/",
+    "build-internal": "ng build --configuration=production --base-href=/coney/cefriel/",
     "build-docker": "ng build --configuration=docker --base-href=/coney/chat/",
     "build-upm": "ng build --configuration=upm --base-href=/chat/",
     "test": "ng test",
