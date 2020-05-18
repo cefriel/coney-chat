@@ -9,9 +9,11 @@ export class AnswerTextComponent implements OnInit {
 
   @Output() sendAnswer = new EventEmitter<string>();
   @Input() answerType: string;
+  @Input() optional: number;
 
   showSkip = true;
   showSend = false;
+  invalidMail = false;
   inputText="";
 
   constructor() {
@@ -19,12 +21,22 @@ export class AnswerTextComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.answerType);
+    console.log(this.optional);
   }
 
   callParent() {
-    if (this.inputText != "" && this.inputText.length > 5) {
-      this.inputText.toString().trim();
-      this.sendAnswer.emit(this.inputText.toString());
+
+    let textToSend = this.inputText.toString().trim();
+
+    if(this.answerType=="email"){
+      if(!this.validateEmail(textToSend)){
+        this.invalidMail=true;
+        return;
+      }
+    }
+    console.log(textToSend);
+    if (textToSend != ""){// && this.inputText.length > 5) {
+      this.sendAnswer.emit(textToSend);
       this.inputText = "";
     }
   }
@@ -34,19 +46,25 @@ export class AnswerTextComponent implements OnInit {
   }
 
   edited() {
-    
+    this.invalidMail = false;
+
     if (this.inputText == "") {
       this.showSkip = true;
     } else {
       this.showSkip = false;
     }
-    /*
-   if (this.inputText.length > 5) {
-    this.showSend = true;
-  } else {
-    this.showSend = false;
-  }*/
+    
+    if (this.inputText.length > 5) {
+      this.showSend = true;
+    } else {
+      this.showSend = false;
+    }
 
   }
 
+
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
 }

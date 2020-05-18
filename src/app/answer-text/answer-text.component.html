@@ -1,4 +1,9 @@
 <div class="row" id="answer-comp">
+
+  <div *ngIf="answerType=='email' && invalidMail" class="col-12">
+    <p class="p-0 m-0"><small style="color: brown;">Please enter a valid email</small></p>
+  </div>
+
   <div class="col-9">
     <!--(keyup.enter)="callParent()" for enter submit-->
 
@@ -28,17 +33,23 @@
       <input matInput type="url" color="accent" name="text-answer" [(ngModel)]="inputText" (keyup.enter)="callParent()" (input)="edited()" autofocus>
     </mat-form-field>
 
-  </div>
-  <div class="col-3"  id="textAreaSendContainer">
+    <mat-form-field *ngIf="answerType=='email'" color="accent" style="width: 100%;">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" color="accent" name="text-answer" [(ngModel)]="inputText" (keyup.enter)="callParent()" (input)="edited()" autofocus>
+    </mat-form-field>
 
+  </div>
+
+  <div *ngIf="optional == 1" class="col-3"  id="textAreaSendContainer">
     <button mat-button color="accent" class="btn-send-answer" *ngIf="showSkip; else sendBtnEnabled" type="submit" (click)="skipQuestion()">skip</button>
     <ng-template #sendBtnEnabled>
       <button mat-button color="accent" class="btn-send-answer" (click)="callParent()" type="submit">
         <img src="./assets/send.svg" height="25px">
       </button>
     </ng-template>
-
-    <!--no skip
+  </div>
+  
+  <div *ngIf="optional == 0" class="col-3"  id="textAreaSendContainer">
     <button *ngIf="showSend; else sendBtnDisabled"  mat-button color="accent" class="btn-send-answer" (click)="callParent()" type="submit">
       <img src="./assets/send.svg" height="25px">
     </button>
@@ -47,6 +58,6 @@
         <img src="./assets/send_disabled.svg" height="25px">
       </button>
     </ng-template>
-  -->
   </div>
+
 </div>

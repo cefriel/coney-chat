@@ -6,5 +6,6 @@ export interface Block {
     of_conversation: string;
     block_type: string;
     block_subtype: string;
+    optional: number;
   }
   

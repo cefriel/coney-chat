@@ -68,6 +68,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   conversationFinished = false;
 
   pastAnswers = false;
+  optional = 0;
   //TEST
   //count = 0;
 
@@ -76,6 +77,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   projectName = null;
   noRepeat = false;
   recreatingConv = false;
+  continueWithDifferentConversation = false;
   reSession = "";
 
   //toBeTranslated
@@ -142,7 +144,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       link: "",
       of_conversation: "",
       block_type: "",
-      block_subtype: ""
+      block_subtype: "",
+      optional: 0
     };
 
     this.answers = [];
@@ -303,6 +306,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
       if (this.userId != undefined && this.userId.substr(0, 2) == "u_" && this.userId.length == 8) {
         //It's random
+        console.log("keep user id");
         endpoint = endpoint + '&userId=' + this.userId;
       }
     }
@@ -318,7 +322,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
 
     endpoint = endpoint + '&restart=' + restart;
-    if (restart == 1 || restart == 2) {
+    if (restart == 1 || restart == 2 || this.continueWithDifferentConversation) {
       endpoint = endpoint + '&session=' + this.reSession;
     }
 
@@ -366,6 +370,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       }
       return;
     });
+
+    this.continueWithDifferentConversation = false;
   }
 
   publishErrorMessage(text: string) {
@@ -417,13 +423,15 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   sendAnswer(answer: any) {
+
     this.recreatingConv = false;
-    if (this.answerType == "text" || this.answerType == "number" || this.answerType == "date" || this.answerType == "time" || this.answerType == "url") {
+    if (this.answerType == "text" || this.answerType == "number" || this.answerType == "date" || this.answerType == "time" || this.answerType == "url" || this.answerType == "email") {
       if (answer != "skip" && answer != "") {
         $('<li/>').addClass('chat-li ans').appendTo($('#chat-ul-list')).append($('<p/>').text(answer).addClass('answer message'));
       } else {
         $('<li/>').addClass('chat-li ans').appendTo($('#chat-ul-list')).append($('<p/>').text("-").addClass('answer message'));
       }
+      this.optional = 0;
       this.block.text = answer;
     } else if (this.answerType == "slider") {
       var res = "";
@@ -527,7 +535,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       link: "",
       of_conversation: "",
       block_type: "",
-      block_subtype: ""
+      block_subtype: "",
+      optional: 0
     };
 
     temp_block.text = param["text"];
@@ -573,14 +582,32 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   async publishMessages(messages: any) {
 
     var c = true;
+    
+    console.log(messages);
     for (var k = 0; k < messages.length; k++) {
 
       var block = messages[k];
+      this.block.link = block["url"];
+
+      if(this.block.link!= undefined && this.block.link.includes("continue:")){
+        console.log("continue conv");
+        this.conv_id = this.block.link.substr(9, this.block.link.length);
+        
+        this.reSession = "continue_" + this.currentSessionId;
+        this.continueWithDifferentConversation = true;
+        console.log(this.conv_id + "-" +  this.userId + "-" + this.reSession);
+        this.getConversation(0);
+        //start new conv
+        return;
+      }
+
       this.block.block_type = block["type"];
       this.block.block_subtype = block["subtype"];
       this.block.of_conversation = block["ofConversation"];
       this.block.text = block["text"];
       this.block.value = parseInt(block["order"], 10);
+
+      
 
       if (this.block.block_type == "AnswerCont") {
         this.pastAnswers == true;
@@ -608,7 +635,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           $('<li/>').addClass('chat-li coney').appendTo($('#chat-ul-list')).append($('<p/>').text(this.block.text).addClass('coney-msg message error'));
         } else {
           this.surveyEnded = true;
-
+//HERE
           if (this.userId == "preview") {
             this.undoEnabled = false;
             this.backend.deleteObject('/chat/deletePreview?conversationId=' + this.currentConversationId + "&session=" + this.currentSessionId).subscribe(bool => {
@@ -651,6 +678,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           genAns.text = this.block.text;
           genAns.value = this.block.value;
           this.answers.push(genAns);
+        } else {
+          this.optional = block["optional"];
+          this.block.optional = block["optional"];
         }
 
       } else if (this.block.block_type == "AnswerCont") {
