@@ -103,7 +103,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   surveyAlreadyCompetedText: string;
   noPublishedSurvey: string;
 
-
+  //modular fields
+  homeScreenLogoSrc="./assets/messages.svg";
 
 
   constructor(private backend: ChatBackendService,
@@ -186,7 +187,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
             document.getElementById("chat").style.display = "flex";
             this.getConversation(1);
           } else {
-            this.getLanguages();
+            this.getConversationDetails();
           }
         }
       } else {
@@ -201,7 +202,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.scrollToBottom();
   }
 
-  getLanguages() {
+  getConversationDetails() {
     this.defaultLanguage = { lang: "", tag: "" };
     this.getReqLanguages = [];
 
@@ -226,6 +227,29 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.errorMessageMainScreen = "Couldn't load the languages. Something went wrong...";
       }
       this.getTitle();
+    }, err => {
+
+      this.isLoading = false;
+    });
+
+
+    endpoint = '/chat/getConversationDetails?conversationId=' + this.conv_id;
+    this.backend.getRequest(endpoint).subscribe(res => {
+      this.isLoading = false;
+      var details:JSON = JSON.parse(res);
+      console.log(details);
+      if(details["chat_image"]!=null && details["chat_image"]!=undefined && details["chat_image"]!=""){
+        this.homeScreenLogoSrc = details["chat_image"];
+      }
+
+      if(details["chat_privacy_notice"]!=null && details["chat_privacy_notice"]!=undefined && details["chat_privacy_notice"]!=""){
+        this.privacyNoticeLink = details["chat_privacy_notice"];
+      }
+
+      if(details["chat_intro_text"]!=null && details["chat_intro_text"]!=undefined && details["chat_intro_text"]!=""){
+        this.privacyNotice = details["chat_intro_text"];
+      }
+      
     }, err => {
 
       this.isLoading = false;

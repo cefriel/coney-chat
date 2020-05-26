@@ -129,7 +129,7 @@
 
   <div id="chat-intro" class="container text text-center justify-content-center p-4" style="padding: 1.5rem!important;">
     <div id="chat-intro-container" class="p-4">
-      <img src="./assets/messages.svg" style="height: 80px; width: auto;" class="mb-4">
+      <img [src]="homeScreenLogoSrc" style="height: 80px; width: auto;" class="mb-4">
       <!--<img src="./assets/cefriel_logo.svg" style="height: 80px; width: auto;" class="my-4">-->
       <h4>{{currentConversationTitle}}</h4>
       <h5 *ngIf="projectName != null && projectName != ''">{{projectName}}</h5>
@@ -151,8 +151,8 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <h6 *ngIf="getReqLanguages.length == 1" style="width: 100%; padding: 1rem; text-align: center;">
-          {{defaultLanguage.lang}}</h6>
+        <!--<h6 *ngIf="getReqLanguages.length == 1" style="width: 100%; padding: 1rem; text-align: center;">
+          {{defaultLanguage.lang}}</h6>-->
         <mat-progress-bar *ngIf="isLoading" style="width:100%" mode="indeterminate"></mat-progress-bar>
 
 
