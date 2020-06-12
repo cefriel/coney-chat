@@ -7,5 +7,6 @@ export interface Block {
     block_type: string;
     block_subtype: string;
     optional: number;
+    checkboxType: string;
   }
   

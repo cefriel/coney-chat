@@ -5,10 +5,17 @@
       
         <form [formGroup]="valueFormGroup" class="text-left" style="width: fit-content;">
             <div *ngFor="let val of answerList; let i = index" >
-                <mat-checkbox *ngIf="(last.text == undefined) || (i != answerList.length-1)" class="example-margin cb-norm" 
-                (change)="onChange($event, false)" [value]="val" [disabled]="disabled">{{val.text}}</mat-checkbox>
-                <mat-checkbox *ngIf="(last.text != undefined) && (i == answerList.length-1)" class="example-margin" 
-                (change)="onChange($event, true)" [value]="val">{{ val.text.substr(4, val.length) }}</mat-checkbox>
+                <mat-checkbox *ngIf="val.type == 'normal'" class="example-margin cb-norm" 
+                (change)="onChange($event, false, false)" [value]="val" [disabled]="disabled">{{val.text}}</mat-checkbox>
+                <mat-checkbox *ngIf="val.type == 'none'" class="example-margin" 
+                (change)="onChange($event, true, false)" [value]="val">{{ val.text }}</mat-checkbox>
+
+                <mat-checkbox *ngIf="val.type == 'other'" [checked]="otherChecked" 
+                (change)="onChange($event, false, true)" [value]="val"></mat-checkbox>
+                <mat-form-field  *ngIf="val.type == 'other'" style="padding-left: .5rem;">
+                  <input matInput placeholder="other" type="text" [(ngModel)]="otherAnswer" [ngModelOptions]="{standalone: true}"/>
+                </mat-form-field>
+
             </div>
          </form>
     </div>

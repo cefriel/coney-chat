@@ -59,7 +59,11 @@ export class AnswerTextComponent implements OnInit {
     } else {
       this.showSend = false;
     }
+  }
 
+  resize(event){
+    event.srcElement.style.height = "1px";
+    event.srcElement.style.height = (10+event.srcElement.scrollHeight)+"px";
   }
 
 

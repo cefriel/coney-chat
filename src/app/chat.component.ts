@@ -146,7 +146,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       of_conversation: "",
       block_type: "",
       block_subtype: "",
-      optional: 0
+      optional: 0,
+      checkboxType: ""
     };
 
     this.answers = [];
@@ -173,7 +174,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
           this.currentConversationTitle = this.projectName;
           this.titleService.setTitle(this.projectName);
-          this.conv_id = decrArray[3];
+          this.conv_id = "id--1920115873-1591191364495";//decrArray[3];
 
           if (decrArray[4] != undefined && decrArray != null && decrArray[4] == "noRepeat") {
             this.noRepeat = true;
@@ -560,7 +561,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       of_conversation: "",
       block_type: "",
       block_subtype: "",
-      optional: 0
+      optional: 0,
+      checkboxType: ""
     };
 
     temp_block.text = param["text"];
@@ -629,6 +631,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.block.block_subtype = block["subtype"];
       this.block.of_conversation = block["ofConversation"];
       this.block.text = block["text"];
+      this.block.checkboxType = block["checkboxType"];
       this.block.value = parseInt(block["order"], 10);
 
       
@@ -693,15 +696,24 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
       } else if (this.block.block_type == "Answer") {
 
-        var genAns: { text: any; value: any; };
+        if (this.block.block_subtype == "multiple") {
 
-        if (this.block.block_subtype == "multiple" || this.questionType == "checkbox") {
-
+          var genAns: { text: any; value: any; };
           //answer multi
-          genAns = { value: 0, text: "" };
+          genAns = { value: 0, text: ""};
           genAns.text = this.block.text;
           genAns.value = this.block.value;
           this.answers.push(genAns);
+
+        } else if (this.block.block_subtype == "checkbox"){
+
+          var genCBAns: { text: any; value: any; type: any };
+          genCBAns = { value: 0, text: "", type: "" };
+          genCBAns.text = this.block.text;
+          genCBAns.value = this.block.value;
+          genCBAns.type = this.block.checkboxType;
+          this.answers.push(genCBAns);
+
         } else {
           this.optional = block["optional"];
           this.block.optional = block["optional"];
@@ -747,6 +759,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   async showAnswers() {
+    console.log(this.answers);
     this.numberOfAnswers = this.answers.length;
     if ((this.block.block_subtype == "multiple" && this.questionType != "slider") || this.block.block_subtype == "checkbox") {
       this.answers.sort(function (a, b) {
