@@ -20,7 +20,7 @@ export class AnswerSlideComponent implements OnInit {
   step = 1;
   response = {value: 0, text: "", tot: 0};
   touched = false;
-
+  displayValue = "";
 
   constructor() {}
 
@@ -60,5 +60,8 @@ export class AnswerSlideComponent implements OnInit {
 
   changedSlide(){
     this.touched = true;
+
+    var index = this.answers.findIndex(x => x.value == this.value);
+    this.displayValue = this.answers[index].text;
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewChecked, Host
 import { ChatBackendService } from './services/backend.service';
 import { Block } from './models/block';
 import { Params, ActivatedRoute } from '@angular/router';
-import { ENUM_IT_STRINGS, ENUM_EN_STRINGS } from './models/strings.model'
+import { ENUM_IT_STRINGS, ENUM_EN_STRINGS, ENUM_PT_STRINGS, ENUM_FR_STRINGS, ENUM_EL_STRINGS, ENUM_FI_STRINGS, ENUM_SK_STRINGS, ENUM_CS_STRINGS, ENUM_ES_STRINGS, ENUM_DE_STRINGS, ENUM_UK_STRINGS, ENUM_HR_STRINGS } from './models/strings.model'
 import * as CryptoJS from 'crypto-js';
 
 import $ from "jquery";
@@ -32,15 +32,15 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   languageValue: any;
   languages = [{ lang: "Afrikaans", tag: "af" }, { lang: "Albanian ", tag: "sp" }, { lang: "Arabic", tag: "ar" }, { lang: "Basque", tag: "eu" },
-  { lang: "Byelorussian ", tag: "be" }, { lang: "Bulgarian", tag: "bg" }, { lang: "Catalan", tag: "va" }, { lang: "Croatian", tag: "hr" }, { lang: "Czech", tag: "cs" },
-  { lang: "Danish", tag: "da" }, { lang: "Dutch", tag: "nl" }, { lang: "English", tag: "en" }, { lang: "Esperanto", tag: "eo" }, { lang: "Estonian", tag: "et" },
-  { lang: "Finnish", tag: "fi" }, { lang: "Faronese", tag: "fo" }, { lang: "French", tag: "fr" },
-  { lang: "Galician", tag: "gl" }, { lang: "German", tag: "de" }, { lang: "Greek", tag: "el" }, { lang: "Hebrew", tag: "he" }, { lang: "Hungarian", tag: "hu" },
-  { lang: "Icelandic", tag: "is" }, { lang: "Italian", tag: "it" }, { lang: "Irish", tag: "ga" }, { lang: "Japanese", tag: "ja" }, { lang: "Korean", tag: "ko" },
-  { lang: "Latvian", tag: "lv" }, { lang: "Macedonian", tag: "mk" }, { lang: "Maltese", tag: "mt" }, { lang: "Norwegian", tag: "nb" },
-  { lang: "Polish", tag: "pl" }, { lang: "Portuguese", tag: "pt" }, { lang: "Romanian", tag: "ro" },
-  { lang: "Russian", tag: "ru" }, { lang: "Scottish", tag: "gd" }, { lang: "Slovak", tag: "sk" }, { lang: "Slovenian", tag: "sl" },
-  { lang: "Serbian", tag: "sr" }, { lang: "Spanish", tag: "es" }, { lang: "Swedish", tag: "sv" }, { lang: "Turkish", tag: "tr" }, { lang: "Ukranian", tag: "uk" }];
+  { lang: "Byelorussian ", tag: "be" }, { lang: "български език", tag: "bg" }, { lang: "Català", tag: "va" }, { lang: "Hrvatski", tag: "hr" }, { lang: "Čeština", tag: "cs" },
+  { lang: "Dansk", tag: "da" }, { lang: "Nederlands", tag: "nl" }, { lang: "English", tag: "en" }, { lang: "Esperanto", tag: "eo" }, { lang: "Eesti", tag: "et" },
+  { lang: "Suomi", tag: "fi" }, { lang: "Faronese", tag: "fo" }, { lang: "Français", tag: "fr" },
+  { lang: "Galego", tag: "gl" }, { lang: "Deutsch", tag: "de" }, { lang: "Ελληνικά", tag: "el" }, { lang: "עברית", tag: "he" }, { lang: "Magyar", tag: "hu" },
+  { lang: "Icelandic", tag: "is" }, { lang: "Italiano", tag: "it" }, { lang: "Irish", tag: "ga" }, { lang: "Japanese", tag: "ja" }, { lang: "Korean", tag: "ko" },
+  { lang: "Latviešu", tag: "lv" }, { lang: "Mакедонски", tag: "mk" }, { lang: "Malti", tag: "mt" }, { lang: "Norsk", tag: "nb" },
+  { lang: "Polski", tag: "pl" }, { lang: "Português", tag: "pt" }, { lang: "Română", tag: "ro" },
+  { lang: "Русский", tag: "ru" }, { lang: "Scottish", tag: "gd" }, { lang: "Slovenčina", tag: "sk" }, { lang: "Slovenščina", tag: "sl" },
+  { lang: "Српски", tag: "sr" }, { lang: "Español", tag: "es" }, { lang: "Svenska", tag: "sv" }, { lang: "Türkçe", tag: "tr" }, { lang: "Українська", tag: "uk" }];
   getReqLanguages: any;
   filteredLanguages: any;
   defaultLanguage: any = { lang: "", tag: "" };
@@ -111,23 +111,25 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     private route: ActivatedRoute,
     private cookieService: CookieService,
     public dialog: MatDialog,
-    private titleService: Title) { }
+    private titleService: Title) { 
+    }
 
   //prevents page unload if there are changes to be saves
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
 
     if (!this.conversationFinished) {
-      if (this.userId == "preview") {
+      /*if (this.userId == "preview") {
         this.backend.deleteObject('/chat/deletePreview?conversationId=' + this.currentConversationId + "&session=" + this.currentSessionId).subscribe(json => {
           $event.returnValue = true;
         });
-      }
+      }*/
     }
   }
 
   ngOnInit() {
 
+  
     this.getBrowserLanguage();
 
     this.cookieConsent = this.cookieService.get('cco') === "true";
@@ -174,7 +176,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
           this.currentConversationTitle = this.projectName;
           this.titleService.setTitle(this.projectName);
-          this.conv_id = "id--1920115873-1591191364495";//decrArray[3];
+          this.conv_id = decrArray[3];
 
           if (decrArray[4] != undefined && decrArray != null && decrArray[4] == "noRepeat") {
             this.noRepeat = true;
@@ -369,6 +371,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       var conversationJson = json["conversation"];
       this.currentConversationId = conversationJson["conversationId"];
       this.currentConversationTitle = conversationJson["title"];
+
+      parent.postMessage(this.currentConversationTitle, "*");
 
       this.userId = json["userId"];
 
@@ -627,6 +631,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         return;
       }
 
+      if(this.block.link!=undefined && this.block.link.startsWith("_")){
+        parent.postMessage(this.block.link, "*");
+        continue;
+      }
+
       this.block.block_type = block["type"];
       this.block.block_subtype = block["subtype"];
       this.block.of_conversation = block["ofConversation"];
@@ -663,15 +672,16 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         } else {
           this.surveyEnded = true;
 //HERE
-          if (this.userId == "preview") {
+          /*if (this.userId == "preview") {
             this.undoEnabled = false;
             this.backend.deleteObject('/chat/deletePreview?conversationId=' + this.currentConversationId + "&session=" + this.currentSessionId).subscribe(bool => {
             });
-          }
+          }*/
         }
         c = false;
-
-
+        console.log("about");
+        parent.postMessage("_survey_ended", "*");
+        
         /*TEST
         this.count ++;
         if(this.count<20){
@@ -715,8 +725,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
           this.answers.push(genCBAns);
 
         } else {
+
           this.optional = block["optional"];
           this.block.optional = block["optional"];
+
         }
 
       } else if (this.block.block_type == "AnswerCont") {
@@ -831,12 +843,32 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   setButtonsLanguage() {
 
-
     if (this.languageValue.tag == "it") {
       this.strings = ENUM_IT_STRINGS;
+    } else if(this.languageValue.tag == "fr"){
+      this.strings = ENUM_FR_STRINGS;
+    } else if(this.languageValue.tag == "el"){
+      this.strings = ENUM_EL_STRINGS;
+    } else if(this.languageValue.tag == "fi"){
+      this.strings = ENUM_FI_STRINGS;
+    } else if(this.languageValue.tag == "sk"){
+      this.strings = ENUM_SK_STRINGS;
+    } else if(this.languageValue.tag == "cs"){
+      this.strings = ENUM_CS_STRINGS;
+    } else if(this.languageValue.tag == "es"){
+      this.strings = ENUM_ES_STRINGS;
+    } else if(this.languageValue.tag == "de"){
+      this.strings = ENUM_DE_STRINGS;
+    } else if(this.languageValue.tag == "uk"){
+      this.strings = ENUM_UK_STRINGS;
+    } else if(this.languageValue.tag == "hr"){
+      this.strings = ENUM_HR_STRINGS;
+    } else if(this.languageValue.tag == "pt"){
+      this.strings = ENUM_PT_STRINGS;
     } else {
       this.strings = ENUM_EN_STRINGS;
     }
+
 
     this.privacyNotice = this.strings.privacyNotice;
     this.startButtonText = this.strings.startButtonText;

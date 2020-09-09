@@ -89,7 +89,7 @@
         <div id="answer-comp" class="row">
           <div id="answer-comp-internal">
             <div class="row m-0" id="btnDiv" style="justify-content: center;">
-              <button mat-raised-button color="primary" id="endButton" (click)="showEndScreen(true)">{{endScreenButtonText}}</button>
+              <button mat-raised-button color="primary" id="endButton" (click)="showEndScreen(true)">{{endButtonText}}</button>
             </div>
           </div>
         </div>
@@ -134,11 +134,11 @@
       <h4>{{currentConversationTitle}}</h4>
       <h5 *ngIf="projectName != null && projectName != ''">{{projectName}}</h5>
       <br>
-      <p style="font-size: 80%;">
+      <p style="font-size: 80%; color: #2d3c76;">
         {{privacyNotice}}
         <br>
         <a [attr.href]="privacyNoticeLink" target="_blank"
-          style="font-weight: 500;">Privacy Notice</a>
+          style="font-weight: 500; color: #2d3c76;">Privacy Notice</a>
       </p>
       <br>
 

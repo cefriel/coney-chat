@@ -14,6 +14,7 @@ export class AnswerTextComponent implements OnInit {
   showSkip = true;
   showSend = false;
   invalidMail = false;
+  answerTooShort = false;
   inputText="";
 
   constructor() {
@@ -35,7 +36,7 @@ export class AnswerTextComponent implements OnInit {
       }
     }
     console.log(textToSend);
-    if (textToSend != ""){// && this.inputText.length > 5) {
+    if (textToSend != ""){
       this.sendAnswer.emit(textToSend);
       this.inputText = "";
     }
@@ -46,18 +47,16 @@ export class AnswerTextComponent implements OnInit {
   }
 
   edited() {
+    
     this.invalidMail = false;
 
     if (this.inputText == "") {
       this.showSkip = true;
     } else {
       this.showSkip = false;
-    }
-    
-    if (this.inputText.length > 5) {
-      this.showSend = true;
-    } else {
-      this.showSend = false;
+      if(this.inputText.length > 1){
+        this.answerTooShort = false;
+      }
     }
   }
 

@@ -18,6 +18,7 @@ import { NgxStarsModule } from 'ngx-stars';
 import { MatSliderModule, MatCheckboxModule, MatSelectModule, MatButtonModule, MatInputModule, MatDialogModule, MatProgressBarModule } from '@angular/material';
 import { ChatBackendService } from './services/backend.service';
 import { CookieService } from "ngx-cookie-service";
+import {AngularFittextModule} from 'angular-fittext';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { CookieService } from "ngx-cookie-service";
     MatDialogModule,
     HttpClientModule,
     MatProgressBarModule,
+    AngularFittextModule,
     RouterModule.forRoot([])
   ], exports: [
     AnswerTextComponent,

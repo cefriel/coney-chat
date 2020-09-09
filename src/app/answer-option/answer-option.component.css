@@ -2,15 +2,22 @@
     margin: 0px;
 }
 .answerOp{
-    color: #50505b;
-    border-radius: 4px;
+    color: white;
+    background: #2d3c76;
+    border-radius: 10px;
     font-weight: 500;
-    border: 1px solid #b2b8c7;
+    border: none;
     margin: 0px;
+    white-space: pre-wrap !important; 
+    word-break: break-word; 
+    cursor: pointer;
+    box-shadow: 0px 0px 3px 0px #2d3c76b0;
+    padding-bottom: .4rem!important;
+    padding-top: .4rem!important;
 }
 
 .answerOp:hover{
-    background: rgba(245, 245, 245, 0.781);
+    background: #2d3c76bf;
 }
 
 #btnDiv{

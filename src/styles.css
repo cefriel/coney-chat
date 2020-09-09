@@ -1,7 +1,8 @@
+@import url("./assets/font/font_stylesheet.css");
 @import url("coney-theme.css");
 
 html, body {
-  font-family: Quicksand,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: 'Euclid Circular A', Quicksand,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
 
@@ -61,7 +62,7 @@ html, body {
   margin-left: auto;
   margin-right: 2.5%;
   margin-bottom: 0px!important;
-  background: #0053ff;
+  background: #2d3c76;
   color: white;
   max-width: 70%;
   border-radius: 15px 15px 5px 15px;

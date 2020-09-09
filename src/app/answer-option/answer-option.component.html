@@ -1,8 +1,9 @@
 <div id="answer-comp" class="row m-0 justify-content-center text-center">
   <div id="answer-comp-internal" style="max-height: 45vh; overflow-y: scroll;">
       <div class="row m-0" id="btnDiv" style="justify-content: center;">
-        <button mat-button class="answerOp m-1" *ngFor="let answer of answers; let i = index" style="white-space: pre-wrap !important; word-break: break-word;"
-          (click)="callParent(answer)"><p style="margin-bottom: 0px; line-height: 1.5;">{{answer.text}}</p></button>
+        <button class="answerOp m-1" *ngFor="let answer of answers; let i = index" style="width: 100%;" (click)="callParent(answer)">
+          <span fittext [minFontSize]="10" [maxFontSize]="16">{{answer.text}}</span>
+        </button>
       </div>
     </div>
 </div>

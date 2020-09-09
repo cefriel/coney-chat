@@ -4,6 +4,11 @@
     <p class="p-0 m-0"><small style="color: brown;">Please enter a valid email</small></p>
   </div>
 
+  <div *ngIf="answerTooShort" class="col-12">
+    <p class="p-0 m-0"><small style="color: brown;">Your answer is too short</small></p>
+  </div>
+
+
   <div class="col-9">
     <!--(keyup.enter)="callParent()" for enter submit-->
 
@@ -40,22 +45,17 @@
 
   </div>
 
-  <div *ngIf="optional == 1" class="col-3"  id="textAreaSendContainer">
-    <button mat-button color="accent" class="btn-send-answer" *ngIf="showSkip; else sendBtnEnabled" type="submit" (click)="skipQuestion()">skip</button>
-    <ng-template #sendBtnEnabled>
-      <button mat-button color="accent" class="btn-send-answer" (click)="callParent()" type="submit">
-        <img src="./assets/send.svg" height="25px">
-      </button>
-    </ng-template>
-  </div>
-  
-  <div *ngIf="optional == 0" class="col-3"  id="textAreaSendContainer">
-    <button *ngIf="showSend; else sendBtnDisabled"  mat-button color="accent" class="btn-send-answer" (click)="callParent()" type="submit">
-      <img src="./assets/send.svg" height="25px">
+  <div class="col-3"  id="textAreaSendContainer">
+    
+    <button mat-button color="accent" id="skipBtn" class="btn-send-answer" *ngIf="optional == 1 && showSkip; else sendBtnEnabled" type="submit" (click)="skipQuestion()">
+      <img class="mb-1" src="./assets/next.svg" height="25px">
     </button>
-    <ng-template #sendBtnDisabled>
-      <button mat-button color="accent" class="btn-send-answer" type="submit" disabled>
-        <img src="./assets/send_disabled.svg" height="25px">
+    <ng-template #sendBtnEnabled>
+      <button mat-button color="accent"  *ngIf="inputText.length <= 1" class="btn-send-answer" type="submit" (click)="answerTooShort = true">
+        <img class="mb-1" src="./assets/send_disabled.svg" height="25px">
+      </button>
+      <button mat-button color="accent" *ngIf="inputText.length > 1" class="btn-send-answer" (click)="callParent()" type="submit">
+        <img class="mb-1" src="./assets/send.svg" height="25px">
       </button>
     </ng-template>
   </div>

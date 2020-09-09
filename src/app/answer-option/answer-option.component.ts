@@ -1,11 +1,11 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-answer-option',
   templateUrl: './answer-option.component.html',
   styleUrls: ['./answer-option.component.css']
 })
-export class AnswerOptionComponent implements OnInit{
+export class AnswerOptionComponent implements OnInit, AfterViewInit{
 
   @Input() answers: [{ value: number, text: string }];
   @Input() numberOfAnswers: number;
@@ -14,12 +14,17 @@ export class AnswerOptionComponent implements OnInit{
 
   response = { value: 0, text: "" };
   length = 0;
+  fits;
 
   constructor() {
   }
 
   ngOnInit(){
     this.length = this.answers.length;
+  }
+
+  ngAfterViewInit(){
+
   }
 
   callParent(answer: any) {

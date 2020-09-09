@@ -62,9 +62,13 @@
         </div>
         <div class="col-12 mb-3">
             <button mat-button color="accent" class="btn-send-answer"
-             *ngIf="response.value != 0; else sendDisabled" (click)="callParent()">Send</button>
+             *ngIf="response.value != 0; else sendDisabled" (click)="callParent()">
+             <img height="25px" src="./assets/send.svg">
+            </button>
             <ng-template #sendDisabled>
-                    <button mat-button color="accent" class="btn-send-answer" disabled>Send</button>
+                    <button mat-button color="accent" class="btn-send-answer" disabled>
+                        <img height="25px" src="./assets/send_disabled.svg">
+                    </button>
             </ng-template>
         </div>
     </div>
