@@ -182,16 +182,16 @@ export class ChatComponent implements OnInit, AfterViewChecked {
             this.noRepeat = true;
           }
 
-          if (this.userId == "preview" && this.projectName == "preview") {
+          /*if (this.userId == "preview" && this.projectName == "preview") { TEST TO ENABLE DIFFERENT LANGUAGES IN PUBLISHED PREVIEW
             this.isLoading = false;
             this.getReqLanguages = [];
 
             document.getElementById("chat-intro").style.display = "none";
             document.getElementById("chat").style.display = "flex";
             this.getConversation(1);
-          } else {
+          } else {*/
             this.getConversationDetails();
-          }
+         // }
         }
       } else {
         this.errorMessageMainScreen = this.noSurveyChosenText;
@@ -224,7 +224,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.languageValue = this.defaultLanguage;
       }
 
-      this.convOnline = true;
       this.isLoading = false;
       if (this.getReqLanguages.length == 0) {
         this.errorMessageMainScreen = "Couldn't load the languages. Something went wrong...";
@@ -235,12 +234,28 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.isLoading = false;
     });
 
+    if(this.userId == "preview" && this.projectName == "preview"){
+      
+      this.convOnline = true;
+      this.getConversation(1);
+      
+      return;
+    }
+
 
     endpoint = '/chat/getConversationDetails?conversationId=' + this.conv_id;
     this.backend.getRequest(endpoint).subscribe(res => {
       this.isLoading = false;
+
+      if(res == null || res == undefined || res == ""){
+        this.errorMessageMainScreen = "This conversation is not published";
+        this.convOnline = false;
+        console.log("not published");
+        return;
+      }
+
+      this.convOnline = true;
       var details:JSON = JSON.parse(res);
-      console.log(details);
       if(details["chat_image"]!=null && details["chat_image"]!=undefined && details["chat_image"]!=""){
         this.homeScreenLogoSrc = details["chat_image"];
       }
@@ -395,7 +410,12 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.errorMessageMainScreen = this.surveyAlreadyCompetedText;
       } else {
         this.publishErrorMessage("");
-        this.errorMessageMainScreen = "I couldn't find any available surveys";
+        if(this.userId != "preview"){
+          this.errorMessageMainScreen = "I couldn't find any available surveys";
+        } else {
+          this.errorMessageMainScreen = "No preview available for this survey";
+        }
+        
       }
       return;
     });
