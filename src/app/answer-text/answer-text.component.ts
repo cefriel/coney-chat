@@ -27,6 +27,9 @@ export class AnswerTextComponent implements OnInit {
 
   callParent() {
 
+    if (this.inputText !== null && this.inputText !== ""){
+      return;
+    }
     let textToSend = this.inputText.toString().trim();
 
     if(this.answerType=="email"){
@@ -35,11 +38,10 @@ export class AnswerTextComponent implements OnInit {
         return;
       }
     }
-    console.log(textToSend);
-    if (textToSend != ""){
-      this.sendAnswer.emit(textToSend);
-      this.inputText = "";
-    }
+    
+    this.sendAnswer.emit(textToSend);
+    this.inputText = "";
+    
   }
 
   skipQuestion() {
@@ -50,7 +52,7 @@ export class AnswerTextComponent implements OnInit {
     
     this.invalidMail = false;
 
-    if (this.inputText == "") {
+    if (this.inputText === null || this.inputText === "") {
       this.showSkip = true;
     } else {
       this.showSkip = false;

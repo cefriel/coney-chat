@@ -31,19 +31,19 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   scrolltop: number = null;
 
   languageValue: any;
-  languages = [{ lang: "Afrikaans", tag: "af" }, { lang: "Albanian ", tag: "sp" }, { lang: "Arabic", tag: "ar" }, { lang: "Basque", tag: "eu" },
-  { lang: "Byelorussian ", tag: "be" }, { lang: "български език", tag: "bg" }, { lang: "Català", tag: "va" }, { lang: "Hrvatski", tag: "hr" }, { lang: "Čeština", tag: "cs" },
-  { lang: "Dansk", tag: "da" }, { lang: "Nederlands", tag: "nl" }, { lang: "English", tag: "en" }, { lang: "Esperanto", tag: "eo" }, { lang: "Eesti", tag: "et" },
-  { lang: "Suomi", tag: "fi" }, { lang: "Faronese", tag: "fo" }, { lang: "Français", tag: "fr" },
-  { lang: "Galego", tag: "gl" }, { lang: "Deutsch", tag: "de" }, { lang: "Ελληνικά", tag: "el" }, { lang: "עברית", tag: "he" }, { lang: "Magyar", tag: "hu" },
-  { lang: "Icelandic", tag: "is" }, { lang: "Italiano", tag: "it" }, { lang: "Irish", tag: "ga" }, { lang: "Japanese", tag: "ja" }, { lang: "Korean", tag: "ko" },
-  { lang: "Latviešu", tag: "lv" }, { lang: "Mакедонски", tag: "mk" }, { lang: "Malti", tag: "mt" }, { lang: "Norsk", tag: "nb" },
-  { lang: "Polski", tag: "pl" }, { lang: "Português", tag: "pt" }, { lang: "Română", tag: "ro" },
-  { lang: "Русский", tag: "ru" }, { lang: "Scottish", tag: "gd" }, { lang: "Slovenčina", tag: "sk" }, { lang: "Slovenščina", tag: "sl" },
-  { lang: "Српски", tag: "sr" }, { lang: "Español", tag: "es" }, { lang: "Svenska", tag: "sv" }, { lang: "Türkçe", tag: "tr" }, { lang: "Українська", tag: "uk" }];
+  languages = [{ title: "", lang: "Afrikaans", tag: "af" }, { title: "", lang: "Albanian ", tag: "sp" }, { title: "", lang: "Arabic", tag: "ar" }, { title: "", lang: "Basque", tag: "eu" },
+  { title: "", lang: "Byelorussian ", tag: "be" }, { title: "", lang: "български език", tag: "bg" }, { title: "", lang: "Català", tag: "va" }, { title: "", lang: "Hrvatski", tag: "hr" }, { title: "", lang: "Čeština", tag: "cs" },
+  { title: "", lang: "Dansk", tag: "da" }, { title: "", lang: "Nederlands", tag: "nl" }, { title: "", lang: "English", tag: "en" }, { title: "", lang: "Esperanto", tag: "eo" }, { title: "", lang: "Eesti", tag: "et" },
+  { title: "", lang: "Suomi", tag: "fi" }, { title: "", lang: "Faronese", tag: "fo" }, { title: "", lang: "Français", tag: "fr" },
+  { title: "", lang: "Galego", tag: "gl" }, { title: "", lang: "Deutsch", tag: "de" }, { title: "", lang: "Ελληνικά", tag: "el" }, { title: "", lang: "עברית", tag: "he" }, { title: "", lang: "Magyar", tag: "hu" },
+  { title: "", lang: "Icelandic", tag: "is" }, { title: "", lang: "Italiano", tag: "it" }, { title: "", lang: "Irish", tag: "ga" }, { title: "", lang: "Japanese", tag: "ja" }, { title: "", lang: "Korean", tag: "ko" },
+  { title: "", lang: "Latviešu", tag: "lv" }, { title: "", lang: "Mакедонски", tag: "mk" }, { title: "", lang: "Malti", tag: "mt" }, { title: "", lang: "Norsk", tag: "nb" },
+  { title: "", lang: "Polski", tag: "pl" }, { title: "", lang: "Português", tag: "pt" }, { title: "", lang: "Română", tag: "ro" },
+  { title: "", lang: "Русский", tag: "ru" }, { title: "", lang: "Scottish", tag: "gd" }, { title: "", lang: "Slovenčina", tag: "sk" }, { title: "", lang: "Slovenščina", tag: "sl" },
+  { title: "", lang: "Српски", tag: "sr" }, { title: "", lang: "Español", tag: "es" }, { title: "", lang: "Svenska", tag: "sv" }, { title: "", lang: "Türkçe", tag: "tr" }, { title: "", lang: "Українська", tag: "uk" }];
   getReqLanguages: any;
   filteredLanguages: any;
-  defaultLanguage: any = { lang: "", tag: "" };
+  defaultLanguage: any = { title: "", lang: "", tag: "" };
 
   strings: any;
   currentConversationId = '';
@@ -206,19 +206,26 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   getConversationDetails() {
-    this.defaultLanguage = { lang: "", tag: "" };
+    this.defaultLanguage = { title: "", lang: "", tag: "" };
     this.getReqLanguages = [];
 
     let endpoint = '/chat/getLanguagesOfConversation?conversationId=' + this.conv_id;
     this.backend.getRequest(endpoint).subscribe(res => {
       this.getReqLanguages = JSON.parse(res);
+      console.log(this.getReqLanguages);
       this.filteredLanguages = [];
+
       for (var i = 0; i < this.languages.length; i++) {
-        if (this.getReqLanguages.includes(this.languages[i].tag)) {
+
+        var index = this.getReqLanguages.findIndex(x => x.language == this.languages[i].tag);
+  
+        if (index!=-1) {
+          this.languages[i].title = this.getReqLanguages[index].title;
+          console.log(this.languages[i]);
           this.filteredLanguages.push(this.languages[i]);
         }
       }
-
+      console.log(this.filteredLanguages);
       this.defaultLanguage = this.filteredLanguages[0];
       if (this.filteredLanguages.length == 1) {
         this.languageValue = this.defaultLanguage;
@@ -234,13 +241,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.isLoading = false;
     });
 
-    if(this.userId == "preview" && this.projectName == "preview"){
-      
-      this.convOnline = true;
-      this.getConversation(1);
-      
-      return;
-    }
+    
 
 
     endpoint = '/chat/getConversationDetails?conversationId=' + this.conv_id;
@@ -248,6 +249,15 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.isLoading = false;
 
       if(res == null || res == undefined || res == ""){
+
+        if(this.userId == "preview" && this.projectName == "preview"){
+      
+          this.convOnline = true;
+          this.getConversation(1);
+          return;
+
+        }
+
         this.errorMessageMainScreen = "This conversation is not published";
         this.convOnline = false;
         console.log("not published");
@@ -863,6 +873,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   setButtonsLanguage() {
 
+    if(this.languageValue.title != null && this.languageValue.title != ""){
+      this.currentConversationTitle = this.languageValue.title;
+    }
+
     if (this.languageValue.tag == "it") {
       this.strings = ENUM_IT_STRINGS;
     } else if(this.languageValue.tag == "fr"){
@@ -915,7 +929,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   getBrowserLanguage() {
     var langArr = navigator.language.split("-");
-    this.languageValue = { lang: "", tag: "" };
+    this.languageValue = { title: "", lang: "", tag: "" };
     this.languageValue.tag = langArr[0];
     this.setButtonsLanguage();
   }
