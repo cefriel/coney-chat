@@ -51,10 +51,10 @@
       <img class="mb-1" src="./assets/next.svg" height="25px">
     </button>
     <ng-template #sendBtnEnabled>
-      <button mat-button color="accent"  *ngIf="inputText.length <= 1" class="btn-send-answer" type="submit" (click)="answerTooShort = true">
+      <button mat-button color="accent"  *ngIf="inputText.length <= 1 || noNumber" class="btn-send-answer" type="submit" (click)="answerTooShort = true">
         <img class="mb-1" src="./assets/send_disabled.svg" height="25px">
       </button>
-      <button mat-button color="accent" *ngIf="inputText.length > 1" class="btn-send-answer" (click)="callParent()" type="submit">
+      <button mat-button color="accent" *ngIf="inputText.length > 1 && !noNumber" class="btn-send-answer" (click)="callParent()" type="submit">
         <img class="mb-1" src="./assets/send.svg" height="25px">
       </button>
     </ng-template>

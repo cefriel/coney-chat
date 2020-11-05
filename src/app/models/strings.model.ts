@@ -78,7 +78,7 @@ export enum ENUM_EL_STRINGS {
     skipButtonText = "salta",
     restartButtonText = "επανεκκίνηση",
     continueButtonText = "να συνεχίσει",
-    endButtonText = "Fatto",
+    endButtonText = "Done",
     endScreenButtonText = "Mostra chat",
     doneConversation = "Φαίνεται ότι είχαμε ήδη αυτή τη μετατροπή ...",
     endScreenText = "Τώρα μπορείς να κλείσεις τη σελίδα 😊",

@@ -13,7 +13,7 @@
   }
   
 </style>
-<div id="chat-container" class="container text-center justify-content-center p-5">
+<div id="chat-container" class="container text-center justify-content-center p-5 percentage-height">
   <div id="chat" class="text-center justify-content-center coneychat">
 
     <div id="title-box" style="padding: 0%" class="row m-0 text-center justify-content-center">
@@ -26,7 +26,7 @@
       </div>
       <div class="col-3" style="padding: 2%">
         <button mat-button *ngIf="undoEnabled; else undoDisabled" class="pr-0" id="undoBtn" (click)="undoLastAnswer()" style="font-weight: 400;
-        color: white;
+        color: var(--primary-color);
         text-decoration: underline;"> 
           <!--<img height="30px" src="./assets/redo.svg">-->
           undo
@@ -134,11 +134,11 @@
       <h4>{{currentConversationTitle}}</h4>
       <h5 *ngIf="projectName != null && projectName != ''">{{projectName}}</h5>
       <br>
-      <p style="font-size: 80%; color: #2d3c76;">
+      <p style="font-size: 80%; color: var(--primary-color);">
         {{privacyNotice}}
         <br>
         <a [attr.href]="privacyNoticeLink" target="_blank"
-          style="font-weight: 500; color: #2d3c76;">Privacy Notice</a>
+          style="font-weight: 500; color: var(--primary-color);">Privacy Notice</a>
       </p>
       <br>
 

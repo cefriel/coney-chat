@@ -29,6 +29,6 @@
     display: flex;  -ms-overflow-style: none;
 }
 
-#cb-container::-webkit-scrollbar{
+/*#cb-container::-webkit-scrollbar{
     display: none;
-}
+}*/

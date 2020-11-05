@@ -277,6 +277,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       if(details["chat_intro_text"]!=null && details["chat_intro_text"]!=undefined && details["chat_intro_text"]!=""){
         this.privacyNotice = details["chat_intro_text"];
       }
+
+      if(details["chat_primary_color"]!=null && details["chat_primary_color"]!=undefined){
+        
+        document.documentElement.style.setProperty('--primary-color', details["chat_primary_color"]);
+        document.documentElement.style.setProperty('--secondary-color', details["chat_secondary_color"]);
+        document.documentElement.style.setProperty('--text-color', details["chat_text_color"]);
+      }
+      
       
     }, err => {
 

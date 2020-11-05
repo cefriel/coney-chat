@@ -2,8 +2,8 @@
     margin: 0px;
 }
 .answerOp{
-    color: white;
-    background: #2d3c76;
+    color: var(--text-color);
+    background: var(--primary-color);
     border-radius: 10px;
     font-weight: 500;
     border: none;
@@ -11,13 +11,13 @@
     white-space: pre-wrap !important; 
     word-break: break-word; 
     cursor: pointer;
-    box-shadow: 0px 0px 3px 0px #2d3c76b0;
+    box-shadow: 0px 0px 3px 0px var(--primary-color);
     padding-bottom: .4rem!important;
     padding-top: .4rem!important;
 }
 
 .answerOp:hover{
-    background: #2d3c76bf;
+    opacity: .8;
 }
 
 #btnDiv{
