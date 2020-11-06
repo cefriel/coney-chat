@@ -8,5 +8,6 @@ export interface Block {
     block_subtype: string;
     optional: number;
     checkboxType: string;
+    maxAnswers: number;
   }
   

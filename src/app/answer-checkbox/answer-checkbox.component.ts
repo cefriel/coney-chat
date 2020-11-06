@@ -8,7 +8,7 @@ import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
 })
 export class AnswerCheckboxComponent implements OnInit {
 
-  @Input() answers: [{ value: number, text: string, type: string }];
+  @Input() answers: [{ order: number, text: string, type: string, maxAnswers: number }];
   @Output() sendAnswer = new EventEmitter<any>();
 
   values: any;
@@ -17,6 +17,8 @@ export class AnswerCheckboxComponent implements OnInit {
   answerList = [];
   last: any = {};
   disabled = false;
+  maxAnswers = 0;
+  maxSelected = false;
 
   otherChecked = false;
   otherAnswer = "";
@@ -26,9 +28,11 @@ export class AnswerCheckboxComponent implements OnInit {
   ngOnInit() {
 
     console.log(this.answers);
-    this.answers.sort((a, b) => (a.value > b.value) ? 1 : -1);
+    this.answers.sort((a, b) => (a.order > b.order) ? 1 : -1);
 
     for (var i = 0; i < this.answers.length; i++) {
+      this.maxAnswers = this.answers[i].maxAnswers;
+      
       if (this.answers[i].type == "none") {
         this.last = this.answers[i];
       } else {
@@ -48,6 +52,14 @@ export class AnswerCheckboxComponent implements OnInit {
 
   onChange(event, dis, other) {
     const values = <FormArray>this.valueFormGroup.get('answerList') as FormArray;
+
+    if(values.length == this.maxAnswers && event.checked){
+      this.maxSelected = true;
+      event.source.checked = false;
+      return;
+    } else {
+      this.maxSelected = false;
+    }
 
     if (dis && !this.disabled) {
       this.disabled = true;

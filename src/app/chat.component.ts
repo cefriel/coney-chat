@@ -149,7 +149,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       block_type: "",
       block_subtype: "",
       optional: 0,
-      checkboxType: ""
+      checkboxType: "",
+      maxAnswers: 0
     };
 
     this.answers = [];
@@ -604,7 +605,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       block_type: "",
       block_subtype: "",
       optional: 0,
-      checkboxType: ""
+      checkboxType: "",
+      maxAnswers: 0
     };
 
     temp_block.text = param["text"];
@@ -680,6 +682,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.block.text = block["text"];
       this.block.checkboxType = block["checkboxType"];
       this.block.value = parseInt(block["order"], 10);
+      this.block.maxAnswers = parseInt(block["maxAnswers"]);
 
       
 
@@ -755,11 +758,12 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
         } else if (this.block.block_subtype == "checkbox"){
 
-          var genCBAns: { text: any; value: any; type: any };
-          genCBAns = { value: 0, text: "", type: "" };
+          var genCBAns: { text: any; maxAnswers: any; order: number, type: any };
+          genCBAns = { maxAnswers : 0, order: 0, text: "", type: "" };
           genCBAns.text = this.block.text;
-          genCBAns.value = this.block.value;
           genCBAns.type = this.block.checkboxType;
+          genCBAns.order = this.block.value;
+          genCBAns.maxAnswers = this.block.maxAnswers;
           this.answers.push(genCBAns);
 
         } else {
