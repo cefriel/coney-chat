@@ -53,7 +53,7 @@ export class AnswerCheckboxComponent implements OnInit {
   onChange(event, dis, other) {
     const values = <FormArray>this.valueFormGroup.get('answerList') as FormArray;
 
-    if(values.length == this.maxAnswers && event.checked){
+    if(this.maxAnswers!=0 && values.length == this.maxAnswers && event.checked){
       this.maxSelected = true;
       event.source.checked = false;
       return;
