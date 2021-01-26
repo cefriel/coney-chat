@@ -1,0 +1,52 @@
+<div class="row-center">
+
+    <!--<div style="width: 100%;">
+        <p *ngIf="answerType=='email' && invalidMail">
+            <small style="color: brown;">Please enter a valid email</small>
+        </p>
+        <p *ngIf="answerTooShort">
+            <small style="color: brown;">Your answer is too short</small>
+        </p>
+    </div>-->
+
+    <div style="width: 80%; display: block">
+        <textarea nz-input class="open-input" id="txt-area-open" *ngIf="answerType=='text' || answerType=='url' || answerType=='time'"
+        placeholder="Message" rows="1"
+        [(ngModel)]="openAnswer" (input)="inputChange($event)"
+        (ngModelChange)="valueChanged($event)" autofocus
+        ></textarea>
+
+        
+        <nz-date-picker *ngIf="answerType=='date'" [(ngModel)]="openAnswer" (ngModelChange)="valueChanged($event)" [nzFormat]="'dd/MM/yyyy'" [nzMode]="'date'"></nz-date-picker>
+
+        <!--<nz-time-picker *ngIf="answerType=='time'" [(ngModel)]="openAnswer" (ngModelChange)="valueChanged($event)" [nzFormat]="'HH:mm'" nzInline ></nz-time-picker>-->
+
+        <input nz-input class="open-input" *ngIf="answerType=='number'"  type="number" placeholder="Number" [(ngModel)]="openAnswer" (ngModelChange)="valueChanged($event)" autofocus/>
+
+        <input nz-input class="open-input" *ngIf="answerType=='email'" type="email" placeholder="Email" [(ngModel)]="openAnswer" (ngModelChange)="valueChanged($event)" autofocus/>
+    </div>
+
+
+    <div style="width: 20%;">
+        <div class="row vertical justify-content-end">
+
+       
+        <!--mandatory questions-->
+        <button *ngIf="!skipVisible && sendEnabled" nz-button (click)="sendAnswers(true)"  class="send-btn">
+            <img src="./assets/icons/ic_send.svg" style="height: 1.5rem;">
+        </button>
+        <button *ngIf="!skipVisible && !sendEnabled" nz-button disabled class="send-btn-disabled">
+            <img src="./assets/icons/ic_send_disabled.svg" style="height: 1.5rem;">
+        </button>
+
+        <!--optional questions-->
+        <button *ngIf="skipVisible && !sendEnabled" nz-button (click)="sendAnswers(false)" class="send-btn">
+            <img src="./assets/icons/ic_skip.svg" style="height: 1.5rem;">
+        </button>
+        <button *ngIf="skipVisible && sendEnabled" nz-button (click)="sendAnswers(true)" class="send-btn">
+            <img src="./assets/icons/ic_send.svg" style="height: 1.5rem;">
+        </button>
+    </div>
+    </div>
+    
+</div>

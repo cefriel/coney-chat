@@ -1,0 +1,77 @@
+<div id="background" class="full">
+
+  <!--Loading screen-->
+  <div *ngIf="loading; else done" id="loading">
+    <div id="inner-card">
+      <div class="row-center">
+        <img src="./assets/icons/ic_logo.svg" style="height: 120px; width: auto;">
+      </div>
+      <div class="full-width">
+        <nz-divider [nzText]="'Coney Chat'"></nz-divider>
+      </div>
+
+      <p *ngIf="error==''" style="width: 100%; text-align: center; margin-top: 3em;">Loading</p>
+      <div class="row-center">
+        <nz-spin *ngIf="error==''" nzSimple [nzSize]="'large'"></nz-spin>
+
+        <!--failed to start, display error-->
+        <div *ngIf="error!=''" class="inner-container">
+          <p class="error"> {{error}}</p>
+        </div>
+
+        <!--loading part-->
+        <div *ngIf="loading && error==''">
+          <div class="row center vertical fh">
+              <div class="row center fw">
+                  <div class="card" style="padding: 2em;">
+                      <div class="lds-roller">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                      </div>
+                      <p class="text-center" style="margin-top: 1em; font-weight: 500;">looking for the conversation</p>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template #done>
+
+
+    <!--start screen-->
+    <div *ngIf="step==1" class="inner-container">
+      <div class="screen-container full">
+        <app-start-ui [setup]="setup" (startSurvey)="startSurvey($event)"></app-start-ui>
+      </div>
+    </div>
+
+    <!--chat screen-->
+    <div *ngIf="step==2" class="inner-container">
+      <div class="screen-container full">
+        <app-chat-ui [compilation]="compilation" (conversationFinished)="endSurvey($event)"></app-chat-ui>
+      </div>
+    </div>
+
+    <!--end screen-->
+    <div *ngIf="step==3" class="inner-container">
+      <div class="screen-container full">
+        <app-end-ui></app-end-ui>
+      </div>
+    </div>
+  </ng-template>
+
+
+
+  <!-- NOT NEEDED FOR NOW <app-cookies *ngIf="cookies"></app-cookies>-->
+</div>

@@ -1,0 +1,60 @@
+<div class="full">
+    <div class="vertical center">
+        <div id="inner-card">
+            <!--Logo-->
+            <div class="row-center">
+                <img [src]="setup.logo" id="start-logo">
+            </div>
+
+            <!--Title-->
+            <div class="full-width text-center">
+                <h2>{{selectedLanguage.title}}</h2>
+                
+            </div>
+
+
+            <!--Privacy text-->
+            <p style="padding: 1rem">{{chatTranslatedText.introText}}
+                <br>
+                <a [attr.href]="chatTranslatedText.privacyLink" target="_blank"
+                    style="font-weight: 500; color: var(--primary-color); width: 100%; text-align: center;">
+                    Privacy Notice</a>
+            </p>
+
+            <!--Language selection-->
+            <div *ngIf="setup.languages.length>1" class="full-width text-center" style="margin-top: 2em;">
+                <p style="color: gray;">{{chatTranslatedText.language}}</p>
+            </div>
+            <div class="row-center" *ngIf="setup.languages.length>1" >
+                <nz-select [(ngModel)]="selectedLanguage" (ngModelChange)="setButtonsLanguage()">
+                    <nz-option *ngFor="let language of setup.languages" [nzValue]="language" [nzLabel]="language.lang">
+                    </nz-option>
+                </nz-select>
+            </div>
+
+            <!--Start survey-->
+            <div class="row-center" style="padding: 1rem; padding-top: 3em;">
+                <button nz-button nzType="primary" [nzSize]="'large'" (click)="startPressed()" class="options-btn"
+                    nzBlock>{{chatTranslatedText.startButtonText}}</button>
+            </div>
+
+            <div class="row-center" style="padding-top: 2em;">
+                <p><small>
+                        {{chatTranslatedText.consentText}}
+                    </small></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="info-fab">
+    <div>
+        <span id="hidden-fab" style="position: absolute;
+      left: 1rem;
+      top: .5rem;">Developed with ❤️ by Cefriel </span>
+        <p class="m-0" style="text-align: right;
+      padding-right: 0.8rem;">
+            <img src="./assets/icons/c-logo.svg" style="height:1.2rem">
+        </p>
+    </div>
+</div>

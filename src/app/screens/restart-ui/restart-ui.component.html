@@ -1,0 +1,16 @@
+<div class="full">
+    <div class="vertical center" style="padding: 1.5rem;">
+        <div class="cardlike">
+            <!--Title-->
+            <div class="full-width text-center">
+                <p style="margin-bottom: 1rem!important;">{{text}}</p>
+            </div>
+
+            <div class="row-center center">
+                <button nz-button class="btn-space options-btn" nzType="secondary" [nzSize]="'large'" (click)="buttonPressed('restart')">{{restart}}</button>
+                <button nz-button class="btn-space options-btn" nzType="primary" [nzSize]="'large'" (click)="buttonPressed('continue')">{{continue}}</button>
+            </div>
+        </div>
+        
+    </div>
+</div>

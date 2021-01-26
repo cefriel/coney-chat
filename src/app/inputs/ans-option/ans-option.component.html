@@ -1,0 +1,9 @@
+<div class="row-center center">
+    <div class="row-center vertical center" style="max-width:500px">
+        <ul style="padding: 0px!important; width: 100%; max-height: 40vh; overflow-y: auto;">
+            <li style="width: 100%; padding: 3px 0px;" *ngFor="let answer of answersToDisplay.answers">
+                <button nz-button nzType="primary" class="options-btn" [nzSize]="'large'" (click)="answerChosen(answer)" nzBlock>{{answer.text}}</button>
+            </li>
+        </ul>
+    </div>
+</div>

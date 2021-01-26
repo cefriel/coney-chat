@@ -1,0 +1,15 @@
+<div class="row-center text-center" style="padding: 2em;">
+  <nz-select [(ngModel)]="selectedAnswer" (ngModelChange)="sendEnabled = true" style="width: 100%;">
+    <nz-option *ngFor="let answer of answersToDisplay.answers" [nzValue]="answer" [nzLabel]="answer.text">
+    </nz-option>
+  </nz-select>
+</div>
+
+<div class="full-width center text-center" style="margin-bottom: 1rem;">
+  <button *ngIf="sendEnabled" nz-button (click)="sendAnswers()" class="send-btn">
+    <img src="./assets/icons/ic_send.svg" style="height: 1.5rem;">
+  </button>
+  <button *ngIf="!sendEnabled" nz-button disabled class="send-btn-disabled">
+    <img src="./assets/icons/ic_send_disabled.svg" style="height: 1.5rem;">
+  </button>
+</div>

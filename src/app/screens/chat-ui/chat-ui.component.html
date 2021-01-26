@@ -1,0 +1,99 @@
+<style>
+  /*REMOVE SCROLLBAR*/
+  #chat-content {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE 10+ */
+  }
+
+  #chat-content::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+</style>
+<div class="full" *ngIf="!showRestart" id="chat-full" style=" background: url(./assets/pattern-coney-light.png);">
+
+
+
+  <!--main screen application-->
+  <div class="chat-app">
+
+    <!--undo button-->
+    <button nz-button nzType="primary" nzShape="circle" id="floatUndo" (click)="undoLastAnswer()"
+      [disabled]="!undoEnabled || messageLoading">
+      <img *ngIf="undoEnabled && !messageLoading" src="./assets/icons/ic_redo.svg"
+        style="height: 1rem; width: auto; margin-top: -.2rem;">
+      <img *ngIf="!undoEnabled || messageLoading" src="./assets/icons/ic_redo_disabled.svg"
+        style="height: 1rem; width: auto; margin-top: -.2rem;">
+    </button>
+
+    <!--chat content, message list and loading-->
+    <div #scrollMe (scroll)="onScroll()" id="chat-content" (resized)="onResize($event)">
+      <!--something went wrong-->
+      <p *ngIf="errorMessage!=''" class="error-mess" style="max-width: 66%;">{{errorMessage}}</p>
+
+      <ul #messagesList id="messagesList">
+      </ul>
+      <div class="row message" style="margin-left: 5px;" *ngIf="messageLoading || recreatingConv">
+        <div class="loading-dots">
+          <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--input area based on viz-->
+    <div id="input-area" *ngIf="answersToDisplay.visualization" [@inputAnimation]>
+      <div *ngIf="answersToDisplay.visualization == 'star'" class="input-inside">
+        <app-ans-star [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer($event)">
+        </app-ans-star>
+      </div>
+      <div *ngIf="answersToDisplay.visualization == 'options'" class="input-inside">
+        <app-ans-option [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer($event)">
+        </app-ans-option>
+      </div>
+      <div *ngIf="answersToDisplay.visualization == 'emoji'" class="input-inside">
+        <app-ans-emoji [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer($event)">
+        </app-ans-emoji>
+      </div>
+      <div *ngIf="answersToDisplay.visualization == 'slider'" class="input-inside">
+        <app-ans-slide [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer($event)">
+        </app-ans-slide>
+      </div>
+      <div *ngIf="answersToDisplay.visualization == 'select'" class="input-inside">
+        <app-ans-select [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer($event)">
+        </app-ans-select>
+      </div>
+      <div *ngIf="answersToDisplay.visualization == 'checkbox'" class="input-inside">
+        <app-ans-checkbox [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer($event)">
+        </app-ans-checkbox>
+      </div>
+      <!--subtype is enough, visualization is sorted in the component-->
+      <div *ngIf="answersToDisplay.subtype == 'single'" class="input-inside">
+        <app-ans-open [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer($event)"></app-ans-open>
+      </div>
+    </div>
+
+
+    <div id="input-area" *ngIf="conversationOver" [@inputAnimation]>
+      <div >
+        <div class="full-width">
+          <button nz-button nzType="primary" [nzSize]="'large'" (click)="closeConversation()" nzBlock>Submit</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!--restart or continue-->
+<app-restart *ngIf="showRestart" [language]="compilation.language.tag" (restartChoice)="restartChoice($event)">
+</app-restart>

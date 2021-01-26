@@ -1,0 +1,16 @@
+<div class="full-width center text-center">
+    <h3 *ngIf="selectedAnswer!=undefined" style="margin-top: .5rem; margin-bottom: 0;">{{selectedAnswer.text}}</h3>
+    <p *ngIf="selectedAnswer==undefined" style="margin-top: .5rem; font-weight: 500;">Slide</p>
+</div>
+<div class="full-width center" style="max-width: 700px; padding: 2em;">
+    <nz-slider [(ngModel)]="currentValue" (ngModelChange)="valueChanged()" (click)="valueChanged()" (touchend)="valueChanged()" [nzDisabled]="disabled" [nzMin]="min" [nzMax]="max">
+    </nz-slider>
+</div>
+<div class="full-width center text-center" style="margin-bottom: 1rem;">
+    <button *ngIf="sendEnabled" nz-button (click)="sendAnswers()" class="send-btn">
+        <img src="./assets/icons/ic_send.svg" style="height: 1.5rem;">
+    </button>
+    <button *ngIf="!sendEnabled" nz-button disabled class="send-btn-disabled">
+        <img src="./assets/icons/ic_send_disabled.svg" style="height: 1.5rem;">
+    </button>
+</div>

@@ -1,0 +1,27 @@
+<div class="full-width center text-center" style="padding: .5rem 0px; font-weight: 500;">
+    <h3 *ngIf="selectedAnswer!=undefined" style="margin: 0;">{{selectedAnswer.text}}</h3>
+    <p *ngIf="selectedAnswer==undefined">Pick one</p>
+</div>
+<div class="row-center center" style="overflow: visible;">
+    <div class="full-width row-center center" style="max-width: 500px; overflow: visible;">
+        <button nz-button nzType="text" [nzSize]="size" nzShape="circle" (click)="emojiSelected($event, 1)" *ngIf="numberOfAnswers>=2" class="emoji-btn">😩</button>
+        <button nz-button nzType="text" [nzSize]="size" nzShape="circle" (click)="emojiSelected($event, 2)" *ngIf="numberOfAnswers>=4" class="emoji-btn">😞</button>
+        <button nz-button nzType="text" [nzSize]="size" nzShape="circle" (click)="emojiSelected($event, 3)" *ngIf="numberOfAnswers==3 || numberOfAnswers>=5" class="emoji-btn">😐</button>
+        <button nz-button nzType="text" [nzSize]="size" nzShape="circle" (click)="emojiSelected($event, 4)" *ngIf="numberOfAnswers>=4" class="emoji-btn">😊</button>
+        <button nz-button nzType="text" [nzSize]="size" nzShape="circle" (click)="emojiSelected($event, 5)" *ngIf="numberOfAnswers>=2" class="emoji-btn">😄</button>
+    
+    
+        <button nz-button nzType="primary" nzShape="circle" (click)="emojiSelected($event, 0)" *ngIf="numberOfAnswers==1">😄</button>
+    </div>
+</div>
+
+<div class="full-width center text-center" *ngIf="numberOfAnswers!=1" style="margin-bottom: 1rem; margin-top: 1.5rem;">
+
+    <button *ngIf="sendEnabled" nz-button (click)="sendAnswers()"  nzType="primary"  class="send-btn">
+        <img src="./assets/icons/ic_send.svg" style="height: 1.5rem;">
+    </button>
+    <button *ngIf="!sendEnabled" nz-button disabled class="send-btn-disabled">
+        <img src="./assets/icons/ic_send_disabled.svg" style="height: 1.5rem;">
+    </button>
+
+</div>

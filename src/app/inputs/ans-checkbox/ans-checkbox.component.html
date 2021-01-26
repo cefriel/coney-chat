@@ -1,0 +1,25 @@
+<div class="full-width" style="padding: 2em;">
+    <div class="row-center center">
+        <div class="center" style="max-width:500px; width: auto!important; max-height: 26vh;  overflow-y: auto;">
+
+    <div *ngFor="let answer of answerList; index as i" style="width: 100%; text-align: left;">
+        <!--normal box-->
+        <label nz-checkbox *ngIf="answer.type == 'normal'" [(ngModel)]="answer.checked"
+            [disabled]="disabled" (ngModelChange)="updateAllChecked('normal', i)">{{answer.text}}</label>
+        <!--none box-->
+        <label nz-checkbox *ngIf="answer.type == 'none'" [(ngModel)]="answer.checked"
+            (ngModelChange)="updateAllChecked('none', i)">{{answer.text}}</label>
+        <!--other box-->
+        <label nz-checkbox *ngIf="answer.type == 'other'" [(ngModel)]="answer.checked" [disabled]="disabled" (ngModelChange)="updateAllChecked('other', i)"></label>
+        <input nz-input *ngIf="answer.type == 'other'" placeholder="answer.text" [(ngModel)]="openAnswer" [disabled]="disabled" style="margin-left: 8px;" nzBorderless />
+    </div>
+</div>
+</div></div>
+<div class="full-width center text-center" style="margin-bottom: 1rem;">
+    <button *ngIf="sendEnabled" nz-button (click)="sendAnswers()"  class="send-btn">
+        <img src="./assets/icons/ic_send.svg" style="height: 1.5rem;">
+    </button>
+    <button *ngIf="!sendEnabled" nz-button disabled class="send-btn-disabled">
+        <img src="./assets/icons/ic_send_disabled.svg" style="height: 1.5rem;">
+    </button>
+</div>
