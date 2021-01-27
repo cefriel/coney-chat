@@ -13,6 +13,7 @@
     height: 0;
   }
 </style>
+
 <div class="full" *ngIf="!showRestart" id="chat-full" style=" background: url(./assets/pattern-coney-light.png);">
 
 
@@ -20,23 +21,43 @@
   <!--main screen application-->
   <div class="chat-app">
 
-    <!--undo button-->
-    <button nz-button nzType="primary" nzShape="circle" id="floatUndo" (click)="undoLastAnswer()"
-      [disabled]="!undoEnabled || messageLoading">
-      <img *ngIf="undoEnabled && !messageLoading" src="./assets/icons/ic_redo.svg"
-        style="height: 1rem; width: auto; margin-top: -.2rem;">
-      <img *ngIf="!undoEnabled || messageLoading" src="./assets/icons/ic_redo_disabled.svg"
-        style="height: 1rem; width: auto; margin-top: -.2rem;">
-    </button>
+
 
     <!--chat content, message list and loading-->
     <div #scrollMe (scroll)="onScroll()" id="chat-content" (resized)="onResize($event)">
+
+      <div class="chat-navbar">
+        <div class="row full-width">
+
+          <button nz-button nzShape="circle" id="chatLogo">
+            <img [src]="compilation.logo" style="height: 1rem; width: auto; margin-top: -.2rem;">
+          </button>
+
+          <h3 id="chatTitle"> <span fittext [minFontSize]="12" [maxFontSize]="16">{{compilation.language.title}}</span>
+          </h3>
+
+          <!--undo button-->
+          <button nz-button nzType="primary" nzShape="circle" id="floatUndo" (click)="undoLastAnswer()"
+            [disabled]="!undoEnabled || messageLoading">
+            <img *ngIf="undoEnabled && !messageLoading" src="./assets/icons/ic_redo.svg"
+              style="height: 1rem; width: auto; margin-top: -.2rem;">
+            <img *ngIf="!undoEnabled || messageLoading" src="./assets/icons/ic_redo_disabled.svg"
+              style="height: 1rem; width: auto; margin-top: -.2rem;">
+          </button>
+        </div>
+
+      </div>
+
+
       <!--something went wrong-->
       <p *ngIf="errorMessage!=''" class="error-mess" style="max-width: 66%;">{{errorMessage}}</p>
 
+      <!--messages-->
       <ul #messagesList id="messagesList">
       </ul>
-      <div class="row message" style="margin-left: 5px;" *ngIf="messageLoading || recreatingConv">
+
+      <!--loading message-->
+      <div class="row message" style="margin-left: 1rem; margin-top: -1rem" *ngIf="messageLoading || recreatingConv">
         <div class="loading-dots">
           <div class="lds-ellipsis">
             <div></div>
@@ -46,6 +67,15 @@
           </div>
         </div>
       </div>
+
+      <!--modal for photos-->
+      <nz-modal [(nzVisible)]="isPicModalVisible" [nzContent]="modalContent" [nzFooter]="null"
+        (nzOnCancel)="handleCancel()" nzCentered>
+        <ng-template #modalContent>
+          <img [src]="openPicture" id="openPic">
+        </ng-template>
+      </nz-modal>
+
     </div>
 
     <!--input area based on viz-->
@@ -82,7 +112,7 @@
 
 
     <div id="input-area" *ngIf="conversationOver" [@inputAnimation]>
-      <div >
+      <div>
         <div class="full-width">
           <button nz-button nzType="primary" [nzSize]="'large'" (click)="closeConversation()" nzBlock>Submit</button>
         </div>

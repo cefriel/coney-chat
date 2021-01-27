@@ -79,6 +79,8 @@ export class AppComponent implements OnInit{
       meta1: this.setup.meta1,
       meta2: this.setup.meta2,
       noRepeat: this.setup.noRepeat,
+      logo: this.setup.logo,
+      title: this.setup.title,
       restart: 0,
       restartSession: "",
       continueWithDifferentConversation: false,

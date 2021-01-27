@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import it from '@angular/common/locales/it';
 import { AngularResizedEventModule } from 'angular-resize-event';
+import { AngularFittextModule } from 'angular-fittext';
 
 import { StartUiComponent } from './screens/start-ui/start-ui.component';
 import { EndUiComponent } from './screens/end-ui/end-ui.component';
@@ -41,6 +42,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 registerLocaleData(it);
 
@@ -65,6 +67,7 @@ registerLocaleData(it);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AngularFittextModule,
     NzDividerModule,
     NzSpinModule,
     NzSelectModule,
@@ -75,6 +78,7 @@ registerLocaleData(it);
     NzButtonModule,
     NzDatePickerModule,
     NzIconModule,
+    NzModalModule,
     NzTimePickerModule,
     AngularResizedEventModule,
     RouterModule.forRoot([])

@@ -33,6 +33,9 @@ export class ChatUiComponent implements OnInit {
   loading = false;
   messageLoading = false;
 
+  isPicModalVisible = false;
+  openPicture = "";
+
   continueWithDifferentConversation = false;
   recreatingConv = false; //defaults the delay to 20
   conversationOver: boolean = false;
@@ -250,7 +253,8 @@ export class ChatUiComponent implements OnInit {
     if(message["subtype"]=="link"){
       li.innerHTML = "<p><a href='"+message["url"]+"'  class='msg-link'>"+message["text"]+"</a></p>";
     } else if(message["subtype"]=="imageUrl"){
-      li.innerHTML = "<img src='"+message["imageUrl"]+"' class='msg-image'>";
+      li.innerHTML = "<img src='"+message["imageUrl"]+"' class='msg-image' />";
+      li.addEventListener('click', this.showPhotoDialog.bind(this));
     } else {
       li.innerHTML = "<p>"+text+"</p>";
     }
@@ -340,6 +344,16 @@ export class ChatUiComponent implements OnInit {
   }
 
   /**************** Other methods ****************/
+
+  showPhotoDialog(photo){
+    console.log(photo);
+    console.log(photo.srcElement.currentSrc);
+    this.isPicModalVisible = true;
+    this.openPicture = photo.srcElement.currentSrc;
+  }
+
+  handleCancel(){this.isPicModalVisible = false;}
+
 
   /**
    * When the restart screen is closed this method is invoked to continue or restart the survey
