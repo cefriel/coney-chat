@@ -349,13 +349,17 @@ export class ChatUiComponent implements OnInit {
    * picture modal
    */
   showPhotoDialog(photo){
-    console.log(photo);
-    console.log(photo.srcElement.currentSrc);
-    this.isPicModalVisible = true;
     this.openPicture = photo.srcElement.currentSrc;
+    if(this.openPicture != undefined && this.openPicture != ""){
+      this.isPicModalVisible = true;
+    }
+   
   }
 
-  handleCancel(){this.isPicModalVisible = false;}
+  handleCancel(){
+    this.isPicModalVisible = false;
+    this.openPicture = undefined;
+  }
 
 
   /**

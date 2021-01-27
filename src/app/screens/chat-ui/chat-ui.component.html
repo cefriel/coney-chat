@@ -73,7 +73,7 @@
       <nz-modal [(nzVisible)]="isPicModalVisible" [nzContent]="modalContent" [nzFooter]="null"
         (nzOnCancel)="handleCancel()" nzCentered>
         <ng-template #modalContent>
-          <img [src]="openPicture" id="openPic">
+          <img [src]="openPicture" id="openPic" style="cursor: pointer;">
         </ng-template>
       </nz-modal>
 
