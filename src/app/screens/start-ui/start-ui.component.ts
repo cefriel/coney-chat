@@ -25,12 +25,19 @@ export class StartUiComponent implements OnInit {
     console.log(this.setup);
     this.titleService.setTitle(this.selectedLanguage.title);
 
-    if(this.setup.introText!=undefined){
+    if(this.setup.languages[0].introText !=undefined && this.setup.languages[0].introText != ""){
+      this.chatTranslatedText.introText = this.setup.languages[0].introText;
+    } else if (this.setup.introText==undefined) {
       this.chatTranslatedText.introText = this.setup.introText;
     }
-    if(this.setup.privacyLink==undefined){
+
+
+    if(this.setup.languages[0].privacyLink !=undefined && this.setup.languages[0].privacyLink != ""){
+      this.chatTranslatedText.introText = this.setup.languages[0].privacyLink;
+    } else if(this.setup.privacyLink==undefined){
       this.chatTranslatedText.privacyLink = "https://www.cefriel.com/en/privacy";
     }
+    
     if(this.setup.logo==undefined){
       this.setup.logo = "./assets/icons/ic_logo.svg";
     }

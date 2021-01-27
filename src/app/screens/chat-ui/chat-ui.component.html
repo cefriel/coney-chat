@@ -21,32 +21,33 @@
   <!--main screen application-->
   <div class="chat-app">
 
+    <!--navbar-->
+    <div class="chat-navbar">
+      <div class="row full-width">
 
+        <button nz-button nzShape="circle" id="chatLogo">
+          <img [src]="compilation.logo" style="height: 1rem; width: auto; margin-top: -.2rem;">
+        </button>
+
+        <h3 id="chatTitle"> <span fittext [minFontSize]="12" [maxFontSize]="16">{{compilation.language.title}}</span>
+        </h3>
+
+        <!--undo button-->
+        <button nz-button nzType="primary" nzShape="circle" id="floatUndo" (click)="undoLastAnswer()"
+          [disabled]="!undoEnabled || messageLoading">
+          <img *ngIf="undoEnabled && !messageLoading" src="./assets/icons/ic_redo.svg"
+            style="height: 1rem; width: auto; margin-top: -.2rem;">
+          <img *ngIf="!undoEnabled || messageLoading" src="./assets/icons/ic_redo_disabled.svg"
+            style="height: 1rem; width: auto; margin-top: -.2rem;">
+        </button>
+      </div>
+
+    </div>
 
     <!--chat content, message list and loading-->
     <div #scrollMe (scroll)="onScroll()" id="chat-content" (resized)="onResize($event)">
 
-      <div class="chat-navbar">
-        <div class="row full-width">
-
-          <button nz-button nzShape="circle" id="chatLogo">
-            <img [src]="compilation.logo" style="height: 1rem; width: auto; margin-top: -.2rem;">
-          </button>
-
-          <h3 id="chatTitle"> <span fittext [minFontSize]="12" [maxFontSize]="16">{{compilation.language.title}}</span>
-          </h3>
-
-          <!--undo button-->
-          <button nz-button nzType="primary" nzShape="circle" id="floatUndo" (click)="undoLastAnswer()"
-            [disabled]="!undoEnabled || messageLoading">
-            <img *ngIf="undoEnabled && !messageLoading" src="./assets/icons/ic_redo.svg"
-              style="height: 1rem; width: auto; margin-top: -.2rem;">
-            <img *ngIf="!undoEnabled || messageLoading" src="./assets/icons/ic_redo_disabled.svg"
-              style="height: 1rem; width: auto; margin-top: -.2rem;">
-          </button>
-        </div>
-
-      </div>
+      
 
 
       <!--something went wrong-->
@@ -57,7 +58,7 @@
       </ul>
 
       <!--loading message-->
-      <div class="row message" style="margin-left: 1rem; margin-top: -1rem" *ngIf="messageLoading || recreatingConv">
+      <div class="row message" style="margin-left: 1rem; margin-top: -1rem; margin-bottom: 2rem;" *ngIf="messageLoading || recreatingConv">
         <div class="loading-dots">
           <div class="lds-ellipsis">
             <div></div>

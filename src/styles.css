@@ -249,6 +249,12 @@ button, .ant-btn{
 .ant-modal-close {
     display: none!important;
 }
+.ant-modal-content {
+    text-align: center!important;
+    background-color: #fff0!important;
+    box-shadow: none!important;
+}
+
 #openPic{
     max-width: 100%;
     max-height: 70vh;

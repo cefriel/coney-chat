@@ -12,14 +12,6 @@
 
 #messagesList{
   padding: 4rem 1rem 1rem 1rem!important;
-  
-  overflow: auto;
-  overflow-y: scroll;
-  margin: 0px!important;
-  padding: 0rem;
-  max-height: 900px;
-  transition: all 0.2s ease!important;
-  scroll-behavior: smooth;
 }
 
 #input-area{
@@ -50,6 +42,7 @@
 }
 
 .chat-navbar{
+  z-index: 99;
   padding: .5rem;
   background-color: white;
   box-shadow: 0px -1px 8px 1px #ccc;

@@ -345,6 +345,9 @@ export class ChatUiComponent implements OnInit {
 
   /**************** Other methods ****************/
 
+  /**
+   * picture modal
+   */
   showPhotoDialog(photo){
     console.log(photo);
     console.log(photo.srcElement.currentSrc);
