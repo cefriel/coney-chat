@@ -21,10 +21,7 @@ export class AnsStarComponent implements OnInit {
   }
 
   valueChanged($event){
-    console.log($event);
     let index = this.answersToDisplay.answers.findIndex(x => x.order = $event);
-    console.log(this.answersToDisplay)
-    console.log(this.answersToDisplay.answers[index])
     if(index != -1){
       this.sendEnabled = true;
       this.value = $event;

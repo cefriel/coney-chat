@@ -17,7 +17,6 @@ export class AnsEmojiComponent implements OnInit {
 
   ngOnInit() {
     this.answersToDisplay.answers.sort((a, b) => (a.order > b.order) ? 1 : -1);
-    console.log(this.answersToDisplay.answers);
     this.numberOfAnswers = this.answersToDisplay.answers.length
   }
 
@@ -36,7 +35,6 @@ export class AnsEmojiComponent implements OnInit {
   }
 
   emojiSelected($event, number){
-    console.log(number);
     if(number == 0){
       this.selectedAnswer = this.answersToDisplay.answers[0];
       this.sendAnswers();
@@ -63,8 +61,6 @@ export class AnsEmojiComponent implements OnInit {
       index = this.numberOfAnswers-1;
     }
 
-    console.log(this.answersToDisplay.answers[index]);
-    console.log(this.answersToDisplay);
     this.selectedAnswer = this.answersToDisplay.answers[index];
     this.setBtnStyle($event.srcElement);
     this.sendEnabled = true;

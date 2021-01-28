@@ -11,7 +11,8 @@
             (ngModelChange)="updateAllChecked('none', i)">{{answer.text}}</label>
         <!--other box-->
         <label nz-checkbox *ngIf="answer.type == 'other'" [(ngModel)]="answer.checked" [disabled]="disabled" (ngModelChange)="updateAllChecked('other', i)"></label>
-        <input nz-input *ngIf="answer.type == 'other'" placeholder="answer.text" [(ngModel)]="openAnswer" [disabled]="disabled" style="margin-left: 8px;" nzBorderless />
+        <input nz-input *ngIf="answer.type == 'other'" [placeholder]="answer.text" [(ngModel)]="openAnswer" [disabled]="disabled" 
+        style="margin-left: 8px; border: none; border-bottom: 1px solid lightgray; outline: none!important;" nzBorderless />
     </div>
 </div>
 </div></div>

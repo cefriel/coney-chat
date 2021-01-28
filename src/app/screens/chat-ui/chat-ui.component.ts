@@ -66,7 +66,6 @@ export class ChatUiComponent implements OnInit {
     private utils: HelperService) { }
 
   ngOnInit() {
-    console.log(this.compilation);
     this.chatTranslatedText = this.utils.getStringTranslation(this.compilation.language.tag);
     this.getConversation();
   }
@@ -160,7 +159,6 @@ export class ChatUiComponent implements OnInit {
     let endpoint = '/chat/continueConversation';
     this.backend.postRequest(endpoint, this.postData).subscribe(json => {
       var blocksJsonArray = json["blocks"];
-      console.log(json);
       this.publishMessages(blocksJsonArray);
     }, err => {
       //TODO
@@ -176,7 +174,6 @@ export class ChatUiComponent implements OnInit {
    * Gradually parses messages and passes them to the display method
    */
   async publishMessages(messages: any) {
-    console.log(messages);
 
     for (var k = 0; k < messages.length; k++) {
 
@@ -185,7 +182,7 @@ export class ChatUiComponent implements OnInit {
       
       //gets the convId of the next conversation and starts it without finishing the previous
       if(block["link"]!= undefined && block["link"].includes("continue:")){
-        console.log("continue conv");
+        console.log("continue conversation");
         this.compilation.convId = block["link"].substr(9, block["link"].length);
         this.compilation.restart = 0;
         this.compilation.restartSession = "continue_" + this.compilation.sessionId;
@@ -199,7 +196,6 @@ export class ChatUiComponent implements OnInit {
       if(block["type"] == "end"){
         
       this.messageLoading = false;
-        console.log("conversation finished");
         console.log("conversation finished");
         this.conversationOver = true;
         
@@ -274,7 +270,6 @@ export class ChatUiComponent implements OnInit {
    */
   sendAnswer($event) {
     this.undoEnabled = true;
-    console.log($event);
     const li = document.createElement('li');
     li.classList.add('answer');
     if($event.text.includes("<ul>")){
@@ -339,7 +334,6 @@ export class ChatUiComponent implements OnInit {
       }
     }
 
-    console.log(this.oldAnswer);
     this.continueConversation(true, this.oldAnswer);
   }
 
@@ -366,7 +360,6 @@ export class ChatUiComponent implements OnInit {
    * When the restart screen is closed this method is invoked to continue or restart the survey
    */
   restartChoice($event: any) {
-    console.log($event);
 
     if($event == "continue"){
       this.compilation.restart = 2;
@@ -388,7 +381,6 @@ export class ChatUiComponent implements OnInit {
 
   //Scroll
   private onScroll() {
-    console.log("onscroll");
     let element = this.myScrollContainer.nativeElement
     let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight
     if (this.disableScrollDown && atBottom) {

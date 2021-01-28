@@ -22,14 +22,13 @@ export class StartUiComponent implements OnInit {
   ngOnInit(){
     this.selectedLanguage = this.setup.languages[0];
     this.chatTranslatedText = this.utils.getStringTranslation(this.selectedLanguage.tag);
-    console.log(this.setup);
     this.titleService.setTitle(this.selectedLanguage.title);
 
     if(this.setup.languages[0].introText !=undefined && this.setup.languages[0].introText != ""){
       this.chatTranslatedText.introText = this.setup.languages[0].introText;
-    } else if (this.setup.introText==undefined) {
+    } else if (this.setup.introText!=undefined) {
       this.chatTranslatedText.introText = this.setup.introText;
-    }
+    } 
 
 
     if(this.setup.languages[0].privacyLink !=undefined && this.setup.languages[0].privacyLink != ""){

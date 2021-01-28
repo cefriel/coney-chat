@@ -51,7 +51,6 @@ export class AppComponent implements OnInit{
   
     this.setup = this.convService.conversation$.subscribe(
       res => {
-        console.log(res)
         if(res.ready){
           this.unsubscribeFromService();
           this.setup = res;

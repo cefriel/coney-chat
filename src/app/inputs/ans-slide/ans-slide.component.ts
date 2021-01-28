@@ -28,7 +28,6 @@ export class AnsSlideComponent implements OnInit {
     this.max = 0;
   
     this.currentValue = 0;
-    console.log(this.answersToDisplay);
     this.max = Math.max.apply(Math, this.answersToDisplay.answers.map(function(o) { return o.order; }));
     this.min = Math.min.apply(Math, this.answersToDisplay.answers.map(function(o) { return o.order; }));
     this.currentValue = this.answersToDisplay.answers.length/2 + 0.5; 

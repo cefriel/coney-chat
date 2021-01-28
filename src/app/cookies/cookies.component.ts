@@ -15,7 +15,6 @@ export class CookiesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.data);
     this.privacyNoticeLink = this.data.privacy;
     this.language = this.data.language;
   }

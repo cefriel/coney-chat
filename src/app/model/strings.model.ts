@@ -24,7 +24,7 @@ export enum ENUM_IT_STRINGS {
 
 export enum ENUM_EN_STRINGS {
     language = "Language",
-    introText = "Please take a moment to review our policy prior to answering the survey questions",
+    introText = "Please take a moment to review our Privacy Policy prior to answering the survey questions",
     startButtonText = "Start",
     sendButtonText = "send",
     skipButtonText = "skip",

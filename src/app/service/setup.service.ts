@@ -90,7 +90,6 @@ export class SetupService {
 
                 if(this.oneSwing){
                     this.paramsOk = false;
-                    console.log("exiting");
                     this.dataGatheringComplete();
                 }
                 this.oneSwing = true;

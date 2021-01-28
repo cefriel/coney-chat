@@ -12,6 +12,7 @@ import { registerLocaleData } from '@angular/common';
 import it from '@angular/common/locales/it';
 import { AngularResizedEventModule } from 'angular-resize-event';
 import { AngularFittextModule } from 'angular-fittext';
+import { PinchZoomModule } from 'ngx-pinch-zoom';
 
 import { StartUiComponent } from './screens/start-ui/start-ui.component';
 import { EndUiComponent } from './screens/end-ui/end-ui.component';
@@ -68,6 +69,7 @@ registerLocaleData(it);
     HttpClientModule,
     BrowserAnimationsModule,
     AngularFittextModule,
+    PinchZoomModule,
     NzDividerModule,
     NzSpinModule,
     NzSelectModule,

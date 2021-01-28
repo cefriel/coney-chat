@@ -57,12 +57,14 @@
   right: 1em;
   border-radius: 50%!important;
   z-index: 10;
+  border:none;
 }
 
 #chatLogo{
-  border: none;
+  margin-left: .2rem;
+  margin-right: .5rem;
   cursor: unset;
-    border-radius: 50%!important;
+  border-radius: 50%!important;
 }
 
 #chatTitle{

@@ -24,7 +24,6 @@ export class AnsOpenComponent implements OnInit {
 
   ngOnInit() {
     
-    console.log(this.answersToDisplay);
     this.answerType = this.answersToDisplay.visualization;
     this.optional = this.answersToDisplay.answers[0].optional;
 
@@ -51,7 +50,6 @@ export class AnsOpenComponent implements OnInit {
 
     
     if ($event == undefined || $event == '') {
-      console.log("void answer");
       if (this.optional == 0) {
         this.skipVisible = false;
         this.sendEnabled=false;
@@ -94,8 +92,6 @@ export class AnsOpenComponent implements OnInit {
         this.sendEnabled = true;
       }
     }
-
-    //console.log(this.openAnswer.toString().trim());
   }
 
   /**

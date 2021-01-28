@@ -24,6 +24,7 @@
     "crypto-js": "^4.0.0",
     "ng-zorro-antd": "^10.1.2",
     "ngx-cookie-service": "^10.1.1",
+    "ngx-pinch-zoom": "^2.5.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

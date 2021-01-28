@@ -73,7 +73,9 @@
       <nz-modal [(nzVisible)]="isPicModalVisible" [nzContent]="modalContent" [nzFooter]="null"
         (nzOnCancel)="handleCancel()" nzCentered>
         <ng-template #modalContent>
-          <img [src]="openPicture" id="openPic" style="cursor: pointer;">
+          <pinch-zoom overflow="visible">
+            <img [src]="openPicture" id="openPic" style="cursor: pointer;">
+          </pinch-zoom>
         </ng-template>
       </nz-modal>
 

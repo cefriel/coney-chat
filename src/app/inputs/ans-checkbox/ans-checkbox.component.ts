@@ -22,7 +22,6 @@ export class AnsCheckboxComponent implements OnInit {
    * prepares the answers array
    */
   ngOnInit() {
-    console.log(this.answersToDisplay);
     this.answersToDisplay.answers.sort((a, b) => (a.order > b.order) ? 1 : -1);
     for(var i = 0; i<this.answersToDisplay.answers.length; i++){
       this.answerList.push(
@@ -43,9 +42,6 @@ export class AnsCheckboxComponent implements OnInit {
    * @param index number: index of the cb pressed
    */
   updateAllChecked(type: string, index: number){
-    console.log(type);
-    console.log(index);
-    console.log(this.answerList);
     //it none is checked, disable the rest
     if(type == "none"){
       this.disabled = !this.disabled;
@@ -58,7 +54,6 @@ export class AnsCheckboxComponent implements OnInit {
     }
     
     if(type == "none"){
-      console.log(total)
       this.sendEnabled = false;
       if(this.disabled || total>0){
         this.sendEnabled = true;
@@ -100,13 +95,11 @@ export class AnsCheckboxComponent implements OnInit {
 
       //finds the selected ones
     } else {
-      console.log(this.answerList);
       for(var i = 0; i<this.answerList.length; i++){
         if(this.answerList[i].checked){
 
           //add the open input value
           if(this.answerList[i].type == "other"){
-            console.log(this.answerList[i]);
             if(this.openAnswer != ""){
               this.answerList[i].text = this.openAnswer;
             }
@@ -131,7 +124,6 @@ export class AnsCheckboxComponent implements OnInit {
         }
       }
       textToDisplay +="</li></ul>"
-      console.log(answersToSend);
     }
 
     
