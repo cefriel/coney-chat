@@ -29,7 +29,6 @@ export class AnsOpenComponent implements OnInit {
 
     if (this.optional == 1) {
       this.skipVisible = true;
-      this.sendEnabled = true; // not visible but active
     }
   }
 
@@ -48,15 +47,14 @@ export class AnsOpenComponent implements OnInit {
    */
   valueChanged($event) {
 
-    
     if ($event == undefined || $event == '') {
       if (this.optional == 0) {
         this.skipVisible = false;
-        this.sendEnabled=false;
       } else if (this.optional == 1) {
         this.skipVisible = true;
-        this.sendEnabled=true;
       }
+
+      this.sendEnabled=false;
       this.openAnswer = '';
 
     } else {
@@ -73,6 +71,7 @@ export class AnsOpenComponent implements OnInit {
         this.skipVisible = false;
       } else if (this.optional == 1) {
         this.skipVisible = true;
+        this.sendEnabled=true;
       }
 
       if ((this.answerType == "text" && this.openAnswer.length > 1)
@@ -92,6 +91,9 @@ export class AnsOpenComponent implements OnInit {
         this.sendEnabled = true;
       }
     }
+
+    console.log("skip: "+this.skipVisible)
+    console.log("send: "+this.sendEnabled)
   }
 
   /**
