@@ -22,6 +22,7 @@ export class AnsCheckboxComponent implements OnInit {
    * prepares the answers array
    */
   ngOnInit() {
+    console.log(this.answersToDisplay);
     this.answersToDisplay.answers.sort((a, b) => (a.order > b.order) ? 1 : -1);
     for(var i = 0; i<this.answersToDisplay.answers.length; i++){
       this.answerList.push(

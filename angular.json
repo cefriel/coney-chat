@@ -21,7 +21,7 @@
             "aot": true,
             "allowedCommonJsDependencies": [
               "tinycolor2"
-           ],
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -61,7 +61,7 @@
                 }
               ]
             },
-            "docker":{
+            "docker": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -150,5 +150,8 @@
       }
     }
   },
-  "defaultProject": "coney-chat"
+  "defaultProject": "coney-chat",
+  "cli": {
+    "analytics": false
+  }
 }

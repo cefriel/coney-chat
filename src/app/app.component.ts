@@ -1,10 +1,11 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
-import { Params, ActivatedRoute } from '@angular/router';
+import { Params, ActivatedRoute, ActivationEnd, Router, NavigationEnd } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
 import { BackendService } from './service/backend.service';
 import { HelperService } from './service/utils.service';
 import { SetupService } from './service/setup.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 /*
 This is the component that starts the process
@@ -18,8 +19,8 @@ This is the component that starts the process
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  
+export class AppComponent implements OnInit {
+
   title = 'coney-chat';
 
   loading: boolean = true;
@@ -36,26 +37,30 @@ export class AppComponent implements OnInit{
 
   constructor(private backend: BackendService,
     private convService: SetupService,
-    private cookieService: CookieService){
+    private cookieService: CookieService) {
     this.loading = true;
-    
-    
+
+
   }
 
-  ngOnInit(){
+  ngOnInit() {
 
-    if (this.cookieService.get('cco') === "true") { 
-      this.hideBanner(undefined); }
+    if (this.cookieService.get('cco') === "true") {
+      this.hideBanner(undefined);
+    }
 
+    this.error = "";
     this.convService.checkQueryParams();
-  
+
     this.setup = this.convService.conversation$.subscribe(
+
       res => {
-        if(res.ready){
+        if (res.ready) {
           this.unsubscribeFromService();
           this.setup = res;
           this.loading = false;
           this.step = 1;
+
           this.convService.conversation$.unsubscribe();
         } else {
           this.error = res.error;
@@ -66,11 +71,11 @@ export class AppComponent implements OnInit{
     );
   }
 
-  unsubscribeFromService(){
+  unsubscribeFromService() {
     this.setup.unsubscribe();
   }
 
-  startSurvey(language: any){
+  startSurvey(language: any) {
     this.compilation = {
       language: language,
       userId: this.setup.userId,
@@ -88,31 +93,31 @@ export class AppComponent implements OnInit{
 
   }
 
-  endSurvey($event){
+  endSurvey($event) {
     this.step = 3;
   }
-  
+
 
 
   cookieReadMorePressed() {
-   /* console.log(this.languageValue);
-    const dialogRef = this.dialog.open(CookieConsentComponent, {
-      width: '400px',
-      maxHeight: '90vh',
-      data: {
-        lang: this.languageValue.tag
-      }
-    });
-    dialogRef.afterClosed().subscribe(res => {
-      if (res != undefined && res == "agree") {
-        this.cookieService.set('cco', "true");
-        this.hideBanner(undefined);
-      }
-    });*/
+    /* console.log(this.languageValue);
+     const dialogRef = this.dialog.open(CookieConsentComponent, {
+       width: '400px',
+       maxHeight: '90vh',
+       data: {
+         lang: this.languageValue.tag
+       }
+     });
+     dialogRef.afterClosed().subscribe(res => {
+       if (res != undefined && res == "agree") {
+         this.cookieService.set('cco', "true");
+         this.hideBanner(undefined);
+       }
+     });*/
   }
 
   hideBanner(type: any) {
-    
+
     this.cookies = false;
 
     if (type != undefined) {

@@ -103,6 +103,8 @@ export class ChatUiComponent implements OnInit {
       this.compilation.convId = conversationJson["conversationId"];
       this.compilation.originalTitle = conversationJson["title"];
 
+      parent.postMessage(conversationJson["title"], "*");
+
       parent.postMessage(this.compilation.language.title, "*");
 
       this.compilation.userId = json["userId"];
@@ -131,6 +133,7 @@ export class ChatUiComponent implements OnInit {
           this.errorMessage = "Error";
         }
       }
+      console.log(this.errorMessage);
     });
 
   }
@@ -174,7 +177,6 @@ export class ChatUiComponent implements OnInit {
    * Gradually parses messages and passes them to the display method
    */
   async publishMessages(messages: any) {
-
     for (var k = 0; k < messages.length; k++) {
 
       var block: any = messages[k];
@@ -192,11 +194,18 @@ export class ChatUiComponent implements OnInit {
         return;
       }
 
+      //postMessage 
+      if(block["link"]!=undefined && block["link"].startsWith("_")){
+        parent.postMessage(block["link"].link, "*");
+        continue;
+      }
+
       //conversationi is over
       if(block["type"] == "end"){
         
       this.messageLoading = false;
         console.log("conversation finished");
+        parent.postMessage("_survey_ended", "*");
         this.conversationOver = true;
         
         return;
@@ -243,11 +252,11 @@ export class ChatUiComponent implements OnInit {
     if(message["type"]=="AnswerCont"){
       li.classList.add('answer');
     } else {
-      li.classList.add('message');
+      li.classList.add('message'); 
     }
     
     if(message["subtype"]=="link"){
-      li.innerHTML = "<p><a href='"+message["url"]+"'  class='msg-link'>"+message["text"]+"</a></p>";
+      li.innerHTML = "<p><a href='"+message["url"]+"' target='_blank' class='msg-link'>"+message["text"]+"</a></p>";
     } else if(message["subtype"]=="imageUrl"){
       li.innerHTML = "<img src='"+message["imageUrl"]+"' class='msg-image' />";
       li.addEventListener('click', this.showPhotoDialog.bind(this));

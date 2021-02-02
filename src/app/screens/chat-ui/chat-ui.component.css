@@ -61,6 +61,7 @@
 }
 
 #chatLogo{
+  overflow: hidden;
   margin-left: .2rem;
   margin-right: .5rem;
   cursor: unset;

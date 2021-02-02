@@ -1,27 +1,36 @@
+<div class="row">
+    <p *ngIf="answerType=='email' && invalidMail">
+        <small style="color: brown;">Please enter a valid email</small>
+    </p>
+
+    <p *ngIf="answerType=='time' && invalidTime">
+        <small style="color: brown;">Please enter a valid time format (e.g. 18:22)</small>
+    </p>
+</div>
 <div class="row-center">
 
-    <!--<div style="width: 100%;">
-        <p *ngIf="answerType=='email' && invalidMail">
-            <small style="color: brown;">Please enter a valid email</small>
-        </p>
-        <p *ngIf="answerTooShort">
+   
+        
+      <!--  <p *ngIf="answerTooShort">
             <small style="color: brown;">Your answer is too short</small>
-        </p>
-    </div>-->
+        </p>-->
+    
 
     <div style="width: 80%; display: block">
-        <textarea nz-input class="open-input" id="txt-area-open" *ngIf="answerType=='text' || answerType=='url' || answerType=='time'"
+        <textarea nz-input class="open-input" id="txt-area-open" *ngIf="answerType=='text' || answerType=='url'"
         placeholder="Message" rows="1"
         [(ngModel)]="openAnswer" (input)="inputChange($event)"
         (ngModelChange)="valueChanged($event)" autofocus
         ></textarea>
 
         
-        <nz-date-picker *ngIf="answerType=='date'" [(ngModel)]="openAnswer" (ngModelChange)="valueChanged($event)" [nzFormat]="'dd/MM/yyyy'" [nzMode]="'date'"></nz-date-picker>
+        <nz-date-picker *ngIf="answerType=='date'" [(ngModel)]="openAnswerDate" (ngModelChange)="valueChanged($event)" [nzFormat]="'dd/MM/yyyy'" [nzMode]="'date'"></nz-date-picker>
 
         <!--<nz-time-picker *ngIf="answerType=='time'" [(ngModel)]="openAnswer" (ngModelChange)="valueChanged($event)" [nzFormat]="'HH:mm'" nzInline ></nz-time-picker>-->
 
         <input nz-input class="open-input" *ngIf="answerType=='number'"  type="number" placeholder="Number" [(ngModel)]="openAnswer" (ngModelChange)="valueChanged($event)" autofocus/>
+        
+        <input nz-input class="open-input" *ngIf="answerType=='time'"  type="text" placeholder="Time (hh:mm)" [(ngModel)]="openAnswer" (ngModelChange)="valueChanged($event)" autofocus/>
 
         <input nz-input class="open-input" *ngIf="answerType=='email'" type="email" placeholder="Email" [(ngModel)]="openAnswer" (ngModelChange)="valueChanged($event)" autofocus/>
     </div>

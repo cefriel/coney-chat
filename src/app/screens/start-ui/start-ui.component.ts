@@ -20,19 +20,25 @@ export class StartUiComponent implements OnInit {
 
 
   ngOnInit(){
-    this.selectedLanguage = this.setup.languages[0];
-    this.chatTranslatedText = this.utils.getStringTranslation(this.selectedLanguage.tag);
-    this.titleService.setTitle(this.selectedLanguage.title);
 
-    if(this.setup.languages[0].introText !=undefined && this.setup.languages[0].introText != ""){
-      this.chatTranslatedText.introText = this.setup.languages[0].introText;
+    this.titleService.setTitle(this.setup.title);
+    
+    if(this.setup.languages!=undefined){
+      this.selectedLanguage = this.setup.languages[0];  
+      this.chatTranslatedText = this.utils.getStringTranslation(this.selectedLanguage.tag);
+      this.titleService.setTitle(this.selectedLanguage.title);
+    }
+    
+
+    if(this.selectedLanguage.introText !=undefined && this.selectedLanguage.introText != ""){
+      this.chatTranslatedText.introText = this.selectedLanguage.introText;
     } else if (this.setup.introText!=undefined) {
       this.chatTranslatedText.introText = this.setup.introText;
     } 
 
 
-    if(this.setup.languages[0].privacyLink !=undefined && this.setup.languages[0].privacyLink != ""){
-      this.chatTranslatedText.introText = this.setup.languages[0].privacyLink;
+    if(this.selectedLanguage.privacyLink !=undefined && this.selectedLanguage.privacyLink != ""){
+      this.chatTranslatedText.introText = this.selectedLanguage.privacyLink;
     } else if(this.setup.privacyLink==undefined){
       this.chatTranslatedText.privacyLink = "https://www.cefriel.com/en/privacy";
     }

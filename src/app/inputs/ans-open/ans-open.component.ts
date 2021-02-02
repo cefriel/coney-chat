@@ -15,11 +15,15 @@ export class AnsOpenComponent implements OnInit {
    }
 
   openAnswer: any;
+
+  openAnswerDate: Date; 
+
   answerType = "";
   optional = 0;
   skipVisible = false;
   sendEnabled = false;
   invalidMail = false;
+  invalidTime = false;
   answerTooShort = false;
 
   ngOnInit() {
@@ -37,7 +41,6 @@ export class AnsOpenComponent implements OnInit {
       $event.srcElement.style.height = 'auto';
       $event.srcElement.style.height = ($event.srcElement.scrollHeight) + 'px';
     }
-
   }
 
   /**
@@ -54,8 +57,14 @@ export class AnsOpenComponent implements OnInit {
         this.skipVisible = true;
       }
 
-      this.sendEnabled=false;
-      this.openAnswer = '';
+      if($event != 0){
+        this.sendEnabled=false;
+        this.openAnswer = '';
+      } else if(this.answerType=="number") {
+        this.sendEnabled = true;
+        this.openAnswer = 0;
+      }
+      
 
     } else {
       if(this.answerType == "date"){
@@ -66,6 +75,7 @@ export class AnsOpenComponent implements OnInit {
 
       this.answerTooShort = false;
       this.invalidMail = false;
+      this.invalidTime = false;
 
       if (this.optional == 0) {
         this.skipVisible = false;
@@ -76,7 +86,6 @@ export class AnsOpenComponent implements OnInit {
 
       if ((this.answerType == "text" && this.openAnswer.length > 1)
         || (this.answerType == "date" && this.openAnswer.length > 5)
-        || (this.answerType == "time" && this.openAnswer.length > 2)
         || (this.answerType == "number")
         || (this.answerType == "url" && this.openAnswer.length > 1)) {
         this.sendEnabled = true;
@@ -84,16 +93,24 @@ export class AnsOpenComponent implements OnInit {
         this.answerTooShort = true;
       }
     }
+
     if (this.answerType == "email") {
       if (!this.validateEmail(this.openAnswer)) {
         this.invalidMail = true;
+        this.sendEnabled = false;
       } else {
         this.sendEnabled = true;
       }
     }
 
-    console.log("skip: "+this.skipVisible)
-    console.log("send: "+this.sendEnabled)
+    if (this.answerType == "time") {
+      if (!this.validateTime(this.openAnswer)) {
+        this.invalidTime = true;
+        this.sendEnabled = false;
+      } else {
+        this.sendEnabled = true;
+      }
+    }
   }
 
   /**
@@ -118,5 +135,10 @@ export class AnsOpenComponent implements OnInit {
   validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
+  }
+
+  validateTime(time){
+    var re = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/ ;
+    return re.test(String(time).toLowerCase());
   }
 }

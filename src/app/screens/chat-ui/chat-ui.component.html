@@ -50,11 +50,15 @@
       
 
 
-      <!--something went wrong-->
-      <p *ngIf="errorMessage!=''" class="error-mess" style="max-width: 66%;">{{errorMessage}}</p>
+     
 
       <!--messages-->
       <ul #messagesList id="messagesList">
+
+         <!--something went wrong-->
+      <p *ngIf="errorMessage!=''" class="error-mess" style="max-width: 66%;">{{errorMessage}} 😞</p>
+
+
       </ul>
 
       <!--loading message-->

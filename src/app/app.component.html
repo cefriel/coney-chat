@@ -20,7 +20,7 @@
         </div>
 
         <!--loading part-->
-        <div *ngIf="loading && error==''">
+        <div id="loading-animation" *ngIf="loading && (error==undefined || error=='')">
           <div class="row center vertical fh">
               <div class="row center fw">
                   <div class="card" style="padding: 2em;">
