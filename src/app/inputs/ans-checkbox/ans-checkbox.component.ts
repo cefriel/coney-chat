@@ -15,6 +15,7 @@ export class AnsCheckboxComponent implements OnInit {
   openAnswer = "";
   maxAnswers: number = 0;
   sendEnabled = false;
+  maxReached = false;
 
   constructor() { }
 
@@ -53,6 +54,7 @@ export class AnsCheckboxComponent implements OnInit {
     for(var i = 0; i<this.answerList.length; i++){
       if(this.answerList[i].checked){total++;}
     }
+    console.log(total+"/"+this.maxAnswers);
     
     if(type == "none"){
       this.sendEnabled = false;
@@ -62,10 +64,14 @@ export class AnsCheckboxComponent implements OnInit {
       return;
     }
 
+    this.maxReached = false;
     //deselect if a max is set and it exceeds it
-    if(this.maxAnswers!=0 && total>this.maxAnswers){
-      this.answerList[index].checked = false;
+    if(this.maxAnswers!=0 && total==this.maxAnswers){
+     // this.answerList[index].checked = false;
+     this.maxReached = true;
     }
+
+    console.log(this.answerList);
 
     //no checked
     this.sendEnabled = true;

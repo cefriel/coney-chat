@@ -296,6 +296,13 @@ export class ChatUiComponent implements OnInit {
       answers: []
     }
 
+    parent.postMessage({
+      type:"answer",
+      questionId: $event.blockId,
+      sentAnswer:$event.toSend,
+      textAnswer:$event.text
+    }, "*");
+
     this.oldAnswer = $event;
 
     this.messageLoading = true;
