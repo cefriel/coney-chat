@@ -12,6 +12,12 @@
                 
             </div>
 
+             <!--Title-->
+             <div *ngIf="setup.userId=='preview'" class="full-width text-center">
+                <h2 style="font-weight: bold; color: brown; margin-bottom: -.5rem;">PREVIEW LINK</h2>
+                <p><i>Answers will not be saved</i></p>
+            </div>
+
 
             <!--Privacy text-->
             <p style="padding: 1rem">{{chatTranslatedText.introText}}
