@@ -7,20 +7,20 @@
             </div>
 
             <!--Title-->
-            <div class="full-width text-center">
+            <div class="full-width text-center" style="margin-bottom: 0; margin-top: 1rem;">
                 <h2>{{selectedLanguage.title}}</h2>
                 
             </div>
 
              <!--Title-->
-             <div *ngIf="setup.userId=='preview'" class="full-width text-center">
-                <h2 style="font-weight: bold; color: brown; margin-bottom: -.5rem;">PREVIEW LINK</h2>
+             <div *ngIf="setup.userId=='preview' && setup.meta1 != 'embedded-demo'" class="full-width text-center">
+                <h2 style="font-weight: bold; color: brown; margin-bottom: -.5rem;">PREVIEW</h2>
                 <p><i>Answers will not be saved</i></p>
             </div>
 
 
             <!--Privacy text-->
-            <p style="padding: 1rem">{{chatTranslatedText.introText}}
+            <p *ngIf="setup.meta1 != 'embedded-demo' && setup.userId!='preview'" style="padding: 1rem">{{chatTranslatedText.introText}}
                 <br>
                 <a [attr.href]="chatTranslatedText.privacyLink" target="_blank"
                     style="font-weight: 500; color: var(--primary-color); width: 100%; text-align: center;">
@@ -39,7 +39,7 @@
             </div>
 
             <!--Start survey-->
-            <div class="row-center" style="padding: 1rem; padding-top: 3em;">
+            <div class="row-center" style="padding-top: 3em;">
                 <button nz-button nzType="primary" [nzSize]="'large'" (click)="startPressed()" class="options-btn"
                     nzBlock>{{chatTranslatedText.startButtonText}}</button>
             </div>
@@ -53,7 +53,7 @@
     </div>
 </div>
 
-<div id="info-fab">
+<div id="info-fab" *ngIf="setup.meta1 != 'embedded-demo'">
     <div>
         <span id="hidden-fab" style="position: absolute;
       left: 1rem;

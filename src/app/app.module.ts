@@ -43,6 +43,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 
 registerLocaleData(it);
@@ -74,6 +75,7 @@ registerLocaleData(it);
     NzSpinModule,
     NzSelectModule,
     NzCheckboxModule,
+    NzProgressModule,
     NzSliderModule,
     NzRateModule,
     NzInputNumberModule,

@@ -15,6 +15,8 @@ export class StartUiComponent implements OnInit {
   selectedLanguage: any;
   chatTranslatedText:any;
 
+  
+
   constructor(private utils: HelperService,
     private titleService: Title) { }
 

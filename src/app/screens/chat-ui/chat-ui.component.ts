@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { BackendService } from 'src/app/service/backend.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -45,9 +45,13 @@ export class ChatUiComponent implements OnInit {
 
   restartSession = "";
   showRestart = false;
-  disableScrollDown = false
+  disableScrollDown = false;
+
+  surveyProgress=0;
 
   postData: JSON = JSON.parse("{}");
+
+  deviceWidth;
 
   errorMessage = "";
 
@@ -67,12 +71,19 @@ export class ChatUiComponent implements OnInit {
 
   ngOnInit() {
     this.chatTranslatedText = this.utils.getStringTranslation(this.compilation.language.tag);
+    this.deviceWidth = window.innerWidth;
     this.getConversation();
   }
 
   ngAfterViewChecked() {
     this.scrollToBottom();
 }
+
+@HostListener('window:resize', ['$event'])
+  onWindowResize(event) {
+    this.deviceWidth = window.innerWidth;
+    console.log(this.deviceWidth);
+  }
 
    /**************** Messages logic methods ****************/
 
@@ -102,6 +113,7 @@ export class ChatUiComponent implements OnInit {
       var conversationJson = json["conversation"];
       this.compilation.convId = conversationJson["conversationId"];
       this.compilation.originalTitle = conversationJson["title"];
+      this.compilation.chatLength = conversationJson["chatLength"];
 
       parent.postMessage(conversationJson["title"], "*");
 
@@ -206,6 +218,7 @@ export class ChatUiComponent implements OnInit {
       this.messageLoading = false;
         console.log("conversation finished");
         parent.postMessage("_survey_ended", "*");
+        this.surveyProgress = 100;
         this.conversationOver = true;
         
         return;
@@ -246,6 +259,13 @@ export class ChatUiComponent implements OnInit {
       delay = 120 * numberOfWord + 150;
     }
     if(this.recreatingConv){delay = 20;}
+
+    if(message["type"]=="Question"){
+      this.surveyProgress = Math.round(100 / this.compilation.chatLength * message["depth"]);
+      if(this.surveyProgress == 100){
+        this.surveyProgress--;
+      }
+    }
 
     //create message item
     const li = document.createElement('li');

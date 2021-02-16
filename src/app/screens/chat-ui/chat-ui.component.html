@@ -12,18 +12,63 @@
     width: 0;
     height: 0;
   }
+
 </style>
 
 <div class="full" *ngIf="!showRestart" id="chat-full" style=" background: url(./assets/pattern-coney-light.png);">
 
 
+  <div id="desktop-banner" *ngIf="deviceWidth > 1000">
+
+
+    <img [src]="compilation.logo" style="height: 10rem; width: auto; max-width: 90%; margin-top: 10rem;">
+
+
+    <h1 id="chatTitle" style="width: 100%; margin-top: 4rem;">
+      {{compilation.language.title}}
+    </h1>
+
+    <!--Preview-->
+    <div *ngIf="compilation.userId=='preview' && compilation.meta1 != 'embedded-demo'" class="full-width text-center" style="margin-top: 3rem;">
+      <h2 style="font-weight: bold; color: brown; margin-bottom: -.5rem;">PREVIEW</h2>
+      <p><i>Answers will not be saved</i></p>
+    </div>
+
+    <!--progress-->
+    <h3 style="font-weight: 600!important; margin-top: 5rem;">
+      Progress:</h3>
+    <div class="row center" style="margin-top: 0rem;">
+      <div style="width: 250px; display: block;">
+        <nz-progress [nzPercent]="surveyProgress" class="margin: 3rem 0"></nz-progress>
+      </div>
+    </div>
+    
+
+    <span style="position: absolute; bottom: 1rem; left: 1rem; right: 1rem; font-weight: 600; ">
+      Developed with ❤️ by 
+      <img src="./assets/icons/c-logo.svg" style="height:1rem; padding-bottom: 2px; margin-left: 3px;">efriel 
+    </span>
+    
+
+  </div>
+
 
   <!--main screen application-->
   <div class="chat-app">
 
+
+    <!--undo button for desktop-->
+    <button nz-button nzType="primary" nzShape="circle" *ngIf="deviceWidth > 1000" id="floatUndo"
+      (click)="undoLastAnswer()" [disabled]="!undoEnabled || messageLoading" style="top: 1rem">
+      <img *ngIf="undoEnabled && !messageLoading" src="./assets/icons/ic_redo.svg"
+        style="height: 1rem; width: auto; margin-top: -.2rem;">
+      <img *ngIf="!undoEnabled || messageLoading" src="./assets/icons/ic_redo_disabled.svg"
+        style="height: 1rem; width: auto; margin-top: -.2rem;">
+    </button>
+
     <!--navbar-->
-    <div class="chat-navbar">
-      <div class="row full-width">
+    <div class="chat-navbar" *ngIf="deviceWidth <= 1000">
+      <div class="row full-width" style="position: relative">
 
         <button nz-button nzShape="circle" id="chatLogo">
           <img [src]="compilation.logo" style="height: 1rem; width: auto; margin-top: -.2rem;">
@@ -32,7 +77,7 @@
         <h3 id="chatTitle"> <span fittext [minFontSize]="12" [maxFontSize]="16">{{compilation.language.title}}</span>
         </h3>
 
-        <!--undo button-->
+        <!--undo button for mobile-->
         <button nz-button nzType="primary" nzShape="circle" id="floatUndo" (click)="undoLastAnswer()"
           [disabled]="!undoEnabled || messageLoading">
           <img *ngIf="undoEnabled && !messageLoading" src="./assets/icons/ic_redo.svg"
@@ -42,27 +87,31 @@
         </button>
       </div>
 
+      <div style="position: absolute; bottom: -.5rem; left: 0rem; right: 0rem;" *ngIf="deviceWidth <= 1000">
+        <div style="display: block; width: 100%;">
+          <nz-progress [nzPercent]="surveyProgress" class="margin:0" [nzShowInfo]="false" nzSize="small"></nz-progress>
+        </div>
+      </div>
+
     </div>
 
     <!--chat content, message list and loading-->
     <div #scrollMe (scroll)="onScroll()" id="chat-content" (resized)="onResize($event)">
 
-      
-
-
-     
-
       <!--messages-->
       <ul #messagesList id="messagesList">
 
-         <!--something went wrong-->
-      <p *ngIf="errorMessage!=''" class="error-mess" style="max-width: 66%;">{{errorMessage}} 😞</p>
+        <!--something went wrong-->
+        <p *ngIf="errorMessage!=''" class="error-mess" style="max-width: 66%;">{{errorMessage}} 😞</p>
+
+
 
 
       </ul>
 
       <!--loading message-->
-      <div class="row message" style="margin-left: 1rem; margin-top: -1rem; margin-bottom: 2rem;" *ngIf="messageLoading || recreatingConv">
+      <div class="row message" style="margin-left: 1rem; margin-top: -1rem; margin-bottom: 2rem;"
+        *ngIf="messageLoading || recreatingConv">
         <div class="loading-dots">
           <div class="lds-ellipsis">
             <div></div>
