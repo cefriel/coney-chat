@@ -7,10 +7,10 @@
     </nz-slider>
 </div>
 <div class="full-width center text-center" style="margin-bottom: 1rem;">
-    <button *ngIf="sendEnabled" nz-button (click)="sendAnswers()" class="send-btn">
-        <img src="./assets/icons/ic_send.svg" style="height: 1.5rem;">
+    <button *ngIf="sendEnabled" nz-button (click)="sendAnswers()" class="send-btn" nzShape="circle">
+        <img src="./assets/icons/ic_send.svg" style="height: 1rem;">
     </button>
-    <button *ngIf="!sendEnabled" nz-button disabled class="send-btn-disabled">
-        <img src="./assets/icons/ic_send_disabled.svg" style="height: 1.5rem;">
+    <button *ngIf="!sendEnabled" nz-button disabled class="send-btn-disabled" nzShape="circle">
+        <img src="./assets/icons/ic_send_disabled.svg" style="height: 1rem;" >
     </button>
 </div>

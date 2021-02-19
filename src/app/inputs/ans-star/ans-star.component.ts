@@ -39,7 +39,7 @@ export class AnsStarComponent implements OnInit {
       block: this.selectedAnswer,
       blockId: this.answersToDisplay.questionId,
       toSend: this.selectedAnswer.order,
-      text: this.value + "/" + this.size //value to be displayed
+      text: this.value + "⭐"  //value to be displayed
     });
   }
 }

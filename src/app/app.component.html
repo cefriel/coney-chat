@@ -1,5 +1,7 @@
 <div id="background" class="full">
 
+  <img src="./assets/icons/ic_coney.svg" style=" position: fixed; height: 20vh; bottom: -7vh; ">
+
   <!--Loading screen-->
   <div *ngIf="loading; else done" id="loading">
     <div id="inner-card">
@@ -22,21 +24,21 @@
         <!--loading part-->
         <div id="loading-animation" *ngIf="loading && (error==undefined || error=='')">
           <div class="row center vertical fh">
-              <div class="row center fw">
-                  <div class="card" style="padding: 2em;">
-                      <div class="lds-roller">
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                      </div>
-                      <p class="text-center" style="margin-top: 1em; font-weight: 500;">looking for the conversation</p>
-                  </div>
+            <div class="row center fw">
+              <div class="card" style="padding: 2em;">
+                <div class="lds-roller">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <p class="text-center" style="margin-top: 1em; font-weight: 500;">looking for the conversation</p>
               </div>
+            </div>
           </div>
         </div>
 
@@ -50,21 +52,21 @@
 
 
     <!--start screen-->
-    <div *ngIf="step==1" class="inner-container">
+    <div *ngIf="step==1" class="inner-container" [@fadeAnimation]>
       <div class="screen-container full">
         <app-start-ui [setup]="setup" (startSurvey)="startSurvey($event)"></app-start-ui>
       </div>
     </div>
 
     <!--chat screen-->
-    <div *ngIf="step==2" class="inner-container">
+    <div *ngIf="step==2" class="inner-container" [@fadeAnimation]>
       <div class="screen-container full">
         <app-chat-ui [compilation]="compilation" (conversationFinished)="endSurvey($event)"></app-chat-ui>
       </div>
     </div>
 
     <!--end screen-->
-    <div *ngIf="step==3" class="inner-container">
+    <div *ngIf="step==3" class="inner-container" [@fadeAnimation]>
       <div class="screen-container full">
         <app-end-ui></app-end-ui>
       </div>

@@ -12,12 +12,12 @@ import { HelperService } from 'src/app/service/utils.service';
     trigger(
       'inputAnimation', [
       transition(':enter', [
-        style({ transform: 'translateY(100%)', opacity: 0 }),
+        style({ transform: 'translateY(40%)', opacity: 0 }),
         animate('200ms ease-in', style({ transform: 'translateY(0)', opacity: 1 }))
       ]),
       transition(':leave', [
-        style({ transform: 'translateY(0)', opacity: 1 }),
-        animate('100ms ease-out', style({ transform: 'translateY(100%)', opacity: 0 }))
+        style({ opacity: 1 }),
+        animate('100ms ease-out', style({ opacity: 0 }))
       ])
     ]
     )
@@ -82,7 +82,6 @@ export class ChatUiComponent implements OnInit {
 @HostListener('window:resize', ['$event'])
   onWindowResize(event) {
     this.deviceWidth = window.innerWidth;
-    console.log(this.deviceWidth);
   }
 
    /**************** Messages logic methods ****************/
@@ -226,7 +225,7 @@ export class ChatUiComponent implements OnInit {
 
 
       await this.displayMessage(block, "auto");
-
+      console.log(block)
       if (block["type"] == "Question" && messages[k+1]["type"]!="AnswerCont") {
         this.answersToDisplay.subtype = block["subtype"];
         this.answersToDisplay.questionId = block["blockId"];
@@ -280,6 +279,8 @@ export class ChatUiComponent implements OnInit {
     } else if(message["subtype"]=="imageUrl"){
       li.innerHTML = "<img src='"+message["imageUrl"]+"' class='msg-image' />";
       li.addEventListener('click', this.showPhotoDialog.bind(this));
+    } else if(message["type"]=="AnswerCont" && message["text"] == ""){
+      li.innerHTML = "<p>"+message["value"]+"</p>";
     } else {
       li.innerHTML = "<p>"+text+"</p>";
     }

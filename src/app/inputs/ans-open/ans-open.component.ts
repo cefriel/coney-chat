@@ -26,6 +26,9 @@ export class AnsOpenComponent implements OnInit {
   invalidTime = false;
   answerTooShort = false;
 
+  enterPressedOnce = false;
+
+
   ngOnInit() {
     
     this.answerType = this.answersToDisplay.visualization;
@@ -109,6 +112,35 @@ export class AnsOpenComponent implements OnInit {
         this.sendEnabled = false;
       } else {
         this.sendEnabled = true;
+      }
+    }
+  }
+
+  keyPressed($event){
+    if($event.key!= "Enter"&& $event.code!= "Enter"){
+      this.enterPressedOnce = false;
+    }
+  }
+
+  enterPressed(){
+
+    //send
+    if(this.answerType != 'text' && this.sendEnabled){
+      this.sendAnswers(true);
+      return;
+    }
+
+    //skip
+    if(this.skipVisible && this.openAnswer == undefined){
+      this.sendAnswers(false);
+      return;
+    }
+
+    if(this.answerType == 'text' && this.sendEnabled){
+      if(!this.enterPressedOnce){
+        this.enterPressedOnce = true;
+      } else {
+        this.sendAnswers(true);
       }
     }
   }

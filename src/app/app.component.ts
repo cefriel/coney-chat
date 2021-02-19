@@ -6,6 +6,7 @@ import { HelperService } from './service/utils.service';
 import { SetupService } from './service/setup.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 /*
 This is the component that starts the process
@@ -17,7 +18,21 @@ This is the component that starts the process
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    trigger(
+      'fadeAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('200ms ease-in', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('100ms ease-out', style({ opacity: 0 }))
+      ])
+    ]
+    )
+  ]
 })
 export class AppComponent implements OnInit {
 

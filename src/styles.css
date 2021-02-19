@@ -42,7 +42,7 @@ p {
 
 /*GENERIC*/
 #background {
-  background: url(./assets/pattern-coney-dark.png);
+  background: url(./assets/pattern-coney-light.png);
 }
 
 .cardlike {
@@ -257,10 +257,6 @@ textarea:focus {
   padding: .5rem;
 }
 
-button,
-.ant-btn {
-  border-radius: 4px !important;
-}
 
 .emoji-btn {
   margin-left: 5px;
@@ -297,6 +293,10 @@ button,
 
 .pz-zoom-button {
   display: none;
+}
+
+#inner-card{
+  border-radius: 4px;
 }
 
 /**/

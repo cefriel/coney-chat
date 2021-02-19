@@ -75,11 +75,14 @@
 }
 
 #desktop-banner {
-  background-color: white;
-  width: 40vw;
+  background-color: #efefef;
+  width: 400px;
   text-align: center;
-  box-shadow: 0px 0px 3px 1px var(--primary-color);
-  position: relative;
+  box-shadow: none;
+  position: relative;    
+  box-shadow: -1px 1px 2px 0px lightgrey;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 @media only screen and (max-width: 999px){
@@ -91,10 +94,12 @@
 
 @media only screen and (min-width: 1000px) {
   .chat-app {
-    max-width: none;
-    width: 60vw;
+    max-width: 600px;
     background: #ffffff73;
     position: relative;
+    box-shadow: 1px 1px 2px 0px lightgrey;
+    border-bottom-left-radius: 0;
+    overflow: hidden;
   }
 
 
@@ -102,37 +107,35 @@
     display: flex;
     justify-content: center;
     overflow: hidden;
+    padding: 3rem;
   }
 
   .input-inside {
-    box-shadow: 0px -1px 8px 1px #ccc;
-    background: white;
     padding: 10px;
-    max-width: 500px;
+    max-width: 400px;
     border-radius: 4px;
   }
 
-  #input-area {
-    background-color: transparent !important;
-    box-shadow: none !important;
+  #input-area{
+    box-shadow: 0px 0px 5px -1px #ccc;
   }
 
   #messagesList {
-    padding: 4rem 5rem 1rem 5rem !important;
+    padding: 4rem 4rem 1rem 4rem !important;
   }
 
   .loading-dots{
-    margin-left: 4rem;
+    margin-left: 3rem!important;
   }
 
 }
 
 @media only screen and (min-width: 1400px) {
   #messagesList {
-    padding: 4rem 12rem 1rem 12rem !important;
+    padding: 4rem 6rem 1rem 6rem !important;
   }
 
   .loading-dots{
-    margin-left: 11rem;
+    margin-left: 5rem!important;
   }
 }

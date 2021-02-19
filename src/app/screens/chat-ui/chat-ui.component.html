@@ -14,14 +14,20 @@
   }
 
 </style>
-
 <div class="full" *ngIf="!showRestart" id="chat-full" style=" background: url(./assets/pattern-coney-light.png);">
 
 
   <div id="desktop-banner" *ngIf="deviceWidth > 1000">
 
 
-    <img [src]="compilation.logo" style="height: 10rem; width: auto; max-width: 90%; margin-top: 10rem;">
+    <button nz-button nzType="primary" nzShape="circle" style="height: 10rem;
+    width: 10rem;
+    margin-top: 10rem;
+    background: white;
+    border-color: transparent;">
+      <img [src]="compilation.logo" style="max-width: 75%; max-height: 75%;">
+    </button>
+    
 
 
     <h1 id="chatTitle" style="width: 100%; margin-top: 4rem;">

@@ -111,7 +111,6 @@ export class SetupService {
             getReqLanguages = JSON.parse(res);
             var outputLanguages = [];
             var languages = this.utils.getLanguageArray();
-
             for (var i = 0; i < languages.length; i++) {
 
                 var index = getReqLanguages.findIndex(x => x.language == languages[i].tag);
@@ -159,6 +158,10 @@ export class SetupService {
             var details: JSON = JSON.parse(res);
             if (details["chat_image"] != null && details["chat_image"] != undefined && details["chat_image"] != "") {
                 this.setup.logo = details["chat_image"];
+            }
+
+            if (details["chat_title"] != null && details["chat_title"] != undefined && details["chat_title"] != "") {
+                this.setup.title = details["chat_title"];
             }
 
             if (details["chat_privacy_notice"] != null && details["chat_privacy_notice"] != undefined && details["chat_privacy_notice"] != "") {

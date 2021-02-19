@@ -39,16 +39,18 @@
             </div>
 
             <!--Start survey-->
-            <div class="row-center" style="padding-top: 3em;">
-                <button nz-button nzType="primary" [nzSize]="'large'" (click)="startPressed()" class="options-btn"
+            <div class="row-center" style="padding-top: 2em; padding-bottom: 1em;">
+                <button nz-button nzType="primary" [nzSize]="'large'" (click)="startPressed()" class="options-btn" 
+                style="width: auto; padding: 0px 30px;"
                     nzBlock>{{chatTranslatedText.startButtonText}}</button>
             </div>
 
-            <div class="row-center" style="padding-top: 2em;">
-                <p><small>
-                        {{chatTranslatedText.consentText}}
-                    </small></p>
-            </div>
+            
+        </div>
+        <div class="row-center" style="padding-top: .5em;">
+            <p style="width: 250px;"><small>
+                    {{chatTranslatedText.consentText}}
+                </small></p>
         </div>
     </div>
 </div>
