@@ -107,7 +107,7 @@
     display: flex;
     justify-content: center;
     overflow: hidden;
-    padding: 3rem;
+    padding: 4rem;
   }
 
   .input-inside {
@@ -121,21 +121,21 @@
   }
 
   #messagesList {
-    padding: 4rem 4rem 1rem 4rem !important;
+    padding: 4rem 3rem 1rem 3rem !important;
   }
 
   .loading-dots{
-    margin-left: 3rem!important;
+    margin-left: 2rem!important;
   }
 
 }
 
 @media only screen and (min-width: 1400px) {
   #messagesList {
-    padding: 4rem 6rem 1rem 6rem !important;
+    padding: 4rem 3rem 1rem 3rem !important;
   }
 
   .loading-dots{
-    margin-left: 5rem!important;
+    margin-left: 2rem!important;
   }
 }

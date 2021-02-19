@@ -14,7 +14,7 @@
   }
 
 </style>
-<div class="full" *ngIf="!showRestart" id="chat-full" style=" background: url(./assets/pattern-coney-light.png);">
+<div class="full" *ngIf="!showRestart" id="chat-full" style="position:relative; background: url(./assets/pattern-coney-light.png);">
 
 
   <div id="desktop-banner" *ngIf="deviceWidth > 1000">
@@ -49,13 +49,21 @@
       </div>
     </div>
     
+    <div class="contact-up"></div>
 
-    <span style="position: absolute; bottom: 1rem; left: 1rem; right: 1rem; font-weight: 600; ">
+    <span style="position: absolute; bottom: 4rem; left: 1rem; right: 1rem; font-weight: 600; ">
+      Want to know more about Coney? 
+      <a style="text-decoration: underline;" 
+      target="_blank"
+      href="https://coney.cefriel.com/">Here!</a>
+    </span>
+
+    <span style="position: absolute; bottom: 1rem; left: 1rem; right: 1rem; font-weight: 500; color: #585858;">
       Developed with ❤️ by 
       <img src="./assets/icons/c-logo.svg" style="height:1rem; padding-bottom: 2px; margin-left: 3px;">efriel 
     </span>
     
-
+    
   </div>
 
 
@@ -182,6 +190,8 @@
     </div>
 
   </div>
+  
+  
 </div>
 
 
