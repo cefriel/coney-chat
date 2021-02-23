@@ -22,7 +22,7 @@
 
     <button nz-button nzType="primary" nzShape="circle" style="height: 10rem;
     width: 10rem;
-    margin-top: 10rem;
+    margin-top: 8vh;
     background: white;
     border-color: transparent;">
       <img [src]="compilation.logo" style="max-width: 75%; max-height: 75%;">
@@ -30,18 +30,18 @@
     
 
 
-    <h1 id="chatTitle" style="width: 100%; margin-top: 4rem;">
+    <h1 id="chatTitle" style="width: 100%; margin-top: 4vh; padding-left: 2rem; padding-right: 2rem;">
       {{compilation.language.title}}
     </h1>
 
     <!--Preview-->
-    <div *ngIf="compilation.userId=='preview' && compilation.meta1 != 'embedded-demo'" class="full-width text-center" style="margin-top: 3rem;">
+    <div *ngIf="compilation.userId=='preview' && compilation.meta1 != 'embedded-demo'" id="desktop-prog" class=" text-center">
       <h2 style="font-weight: bold; color: brown; margin-bottom: -.5rem;">PREVIEW</h2>
       <p><i>Answers will not be saved</i></p>
     </div>
 
     <!--progress-->
-    <h3 style="font-weight: 600!important; margin-top: 5rem;">
+    <h3 style="font-weight: 600!important; margin-top: 5vh;">
       Progress:</h3>
     <div class="row center" style="margin-top: 0rem;">
       <div style="width: 250px; display: block;">

@@ -52,7 +52,7 @@ export class AnsOpenComponent implements OnInit {
    * @param $event input from the various methods
    */
   valueChanged($event) {
-
+    console.log($event);
     if ($event == undefined || $event == '') {
       if (this.optional == 0) {
         this.skipVisible = false;
@@ -75,7 +75,7 @@ export class AnsOpenComponent implements OnInit {
       } else { 
         this.openAnswer = $event.toString();
      }
-
+     console.log(this.openAnswer);
       this.answerTooShort = false;
       this.invalidMail = false;
       this.invalidTime = false;
@@ -94,6 +94,7 @@ export class AnsOpenComponent implements OnInit {
         this.sendEnabled = true;
       } else {
         this.answerTooShort = true;
+        this.sendEnabled = false;
       }
     }
 

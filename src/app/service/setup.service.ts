@@ -15,17 +15,24 @@ export class SetupService {
     languagesOk = undefined;
     paramsOk = undefined;
 
+    notFound = false;
+
     oneSwing = false;
-
     getParams: any;
-
     setup: any = {};
+
     public conversation$ = new BehaviorSubject<any>({});
 
     constructor(private backend: BackendService, private router: Router,
         private utils: HelperService, private route: ActivatedRoute) { }
 
     public dataGatheringComplete(error: string): Observable<any> {
+
+        if(this.notFound){
+            this.setup.error="Unable to find the conversation!";
+            this.conversation$.next(this.setup);
+            return this.conversation$.asObservable();
+        }
 
         if (error != "") {
             this.setup.error = error;
@@ -103,6 +110,7 @@ export class SetupService {
 
     //get url details
     getLanguagesOfConversation() {
+        this.notFound = false;
         var getReqLanguages = [];
 
         let endpoint = '/chat/getLanguagesOfConversation?conversationId=' + this.setup.convId;
@@ -133,6 +141,9 @@ export class SetupService {
             this.dataGatheringComplete("");
         }, err => {
             this.languagesOk = true;
+            if(err.status==404){
+                this.notFound = true;
+            }
             this.dataGatheringComplete("");
         });
 

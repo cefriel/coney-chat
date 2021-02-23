@@ -48,6 +48,7 @@ export class ChatUiComponent implements OnInit {
   disableScrollDown = false;
 
   surveyProgress=0;
+  currentDepth=0;
 
   postData: JSON = JSON.parse("{}");
 
@@ -225,7 +226,6 @@ export class ChatUiComponent implements OnInit {
 
 
       await this.displayMessage(block, "auto");
-      console.log(block)
       if (block["type"] == "Question" && messages[k+1]["type"]!="AnswerCont") {
         this.answersToDisplay.subtype = block["subtype"];
         this.answersToDisplay.questionId = block["blockId"];
@@ -260,15 +260,19 @@ export class ChatUiComponent implements OnInit {
     if(this.recreatingConv){delay = 20;}
 
     if(message["type"]=="Question"){
-      this.surveyProgress = Math.round(100 / this.compilation.chatLength * message["depth"]);
-      if(this.surveyProgress == 100){
-        this.surveyProgress--;
+      if(this.currentDepth < message["depth"]){
+        this.currentDepth = message["depth"];
       }
+      
     }
 
     //create message item
     const li = document.createElement('li');
     if(message["type"]=="AnswerCont"){
+      this.surveyProgress = Math.round(100 / this.compilation.chatLength * this.currentDepth);
+      if(this.surveyProgress == 100){
+        this.surveyProgress--;
+      }
       li.classList.add('answer');
     } else {
       li.classList.add('message'); 
@@ -277,8 +281,27 @@ export class ChatUiComponent implements OnInit {
     if(message["subtype"]=="link"){
       li.innerHTML = "<p><a href='"+message["url"]+"' target='_blank' class='msg-link'>"+message["text"]+"</a></p>";
     } else if(message["subtype"]=="imageUrl"){
-      li.innerHTML = "<img src='"+message["imageUrl"]+"' class='msg-image' />";
+
+      const div = document.createElement('div');
+      div.classList.add("msg-image-container");
+      
+      const imgTmp = document.createElement('img');
+      imgTmp.src = "./assets/icons/ic_image.svg";
+      imgTmp.classList.add("placeholder-image");
+      
+      const img = document.createElement('img');
+      img.src = message["imageUrl"];
+      img.classList.add("msg-image");
+      img.style.display = "none";
+      img.addEventListener('load', this.imageLoaded.bind(this, img, imgTmp));
+
+      div.appendChild(imgTmp);
+      div.appendChild(img);
+
+      //li.innerHTML = "<img src='"+message["imageUrl"]+"' class='msg-image' />";
+      li.appendChild(div);      
       li.addEventListener('click', this.showPhotoDialog.bind(this));
+      
     } else if(message["type"]=="AnswerCont" && message["text"] == ""){
       li.innerHTML = "<p>"+message["value"]+"</p>";
     } else {
@@ -315,6 +338,11 @@ export class ChatUiComponent implements OnInit {
       visualization: "",
       questionId: 0,
       answers: []
+    }
+
+    this.surveyProgress = Math.round(100 / this.compilation.chatLength * this.currentDepth);
+      if(this.surveyProgress == 100){
+        this.surveyProgress--;
     }
 
     parent.postMessage({
@@ -384,7 +412,12 @@ export class ChatUiComponent implements OnInit {
     if(this.openPicture != undefined && this.openPicture != ""){
       this.isPicModalVisible = true;
     }
-   
+  }
+
+  imageLoaded(image, imageTemp){    
+    image.style.display = "block";
+    imageTemp.style.display = "none";
+    this.scrollToBottom();
   }
 
   handleCancel(){
