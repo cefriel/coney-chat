@@ -192,6 +192,11 @@ export class SetupService {
                 document.documentElement.style.setProperty('--accent-color', details["chat_secondary_color"]);
                 document.documentElement.style.setProperty('--text-color', details["chat_text_color"]);
             }
+
+            if (details["chat_font_family"] != null && details["chat_font_family"] != undefined) {
+                document.documentElement.style.setProperty('--main-font', details["chat_font_family"]);
+            }
+            
             this.detailsOk = true;
             this.dataGatheringComplete("");
         }, err => {

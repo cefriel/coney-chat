@@ -9,6 +9,7 @@
   --primary-shadow: #2d3c7652;
   --accent-color: #ffc107;
   --text-color: #fff;
+  --main-font: 'Euclid Circular A';
   touch-action: pan-x pan-y;
   height: 100%
 }
