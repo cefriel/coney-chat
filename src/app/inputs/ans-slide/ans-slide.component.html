@@ -3,7 +3,14 @@
     <p *ngIf="selectedAnswer==undefined" style="margin-top: .5rem; font-weight: 500;">Slide</p>
 </div>
 <div class="full-width center" style="max-width: 700px; padding: 2em;">
-    <nz-slider [(ngModel)]="currentValue" (ngModelChange)="valueChanged()" (click)="valueChanged()" (touchend)="valueChanged()" [nzDisabled]="disabled" [nzMin]="min" [nzMax]="max">
+    <nz-slider [(ngModel)]="currentValue" 
+    (ngModelChange)="valueChanged()" 
+    (click)="valueChanged()" 
+    (touchend)="valueChanged()" 
+    [nzDisabled]="disabled" 
+    [nzMin]="min" 
+    [nzMax]="max"
+    [nzTipFormatter]="null">
     </nz-slider>
 </div>
 <div class="full-width center text-center" style="margin-bottom: 1rem;">
