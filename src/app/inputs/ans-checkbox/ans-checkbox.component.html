@@ -1,8 +1,8 @@
-<div class="full-width" style="padding: 2em;">
+<div class="full-width" style="padding: 1em;">
     <div class="row-center center">
         <div class="center" style="max-width:500px; width: auto!important; max-height: 26vh;  overflow-y: auto;">
 
-    <div *ngFor="let answer of answerList; index as i" style="width: 100%; text-align: left;">
+    <div *ngFor="let answer of answerList; index as i" style="width: 100%; text-align: left; margin-bottom: .5rem;">
         <!--normal box-->
         <label nz-checkbox *ngIf="answer.type == 'normal'" [(ngModel)]="answer.checked"
             [disabled]="disabled || (maxReached && !answer.checked)" (ngModelChange)="updateAllChecked('normal', i)">{{answer.text}}</label>

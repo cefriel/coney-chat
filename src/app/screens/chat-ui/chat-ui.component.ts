@@ -255,7 +255,7 @@ export class ChatUiComponent implements OnInit {
     let numberOfWord = 0;
     if (text != null && delayType == "auto") {
       numberOfWord = text.split(' ').length;
-      delay = 120 * numberOfWord + 150;
+      delay = 80 * numberOfWord + 150;
     }
     if(this.recreatingConv){delay = 20;}
 

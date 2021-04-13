@@ -294,6 +294,10 @@ textarea:focus {
   display: none !important;
 }
 
+.ant-rate-star:not(:last-child) {
+  margin-right: 2px;
+}
+
 .ant-modal-content {
   text-align: center !important;
   background-color: #fff0 !important;

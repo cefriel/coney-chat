@@ -17332,7 +17332,7 @@ nz-pagination {
   overflow: hidden;
   vertical-align: middle;
   background-color: #f5f5f5;
-  border-radius: 100px;
+  border-radius: 0px;
 }
 .ant-progress-circle-trail {
   stroke: #f5f5f5;
@@ -17347,7 +17347,7 @@ nz-pagination {
 .ant-progress-bg {
   position: relative;
   background-color: var(--primary-color);
-  border-radius: 100px;
+  border-radius: 0px;
   transition: all 0.4s cubic-bezier(0.08, 0.82, 0.17, 1) 0s;
 }
 .ant-progress-success-bg {

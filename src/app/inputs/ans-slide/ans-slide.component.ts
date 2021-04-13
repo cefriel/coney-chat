@@ -11,6 +11,7 @@ export class AnsSlideComponent implements OnInit {
   selectedAnswer: any;
 
   disabled = false;
+  maxMinDisplayed = false;
   sendEnabled = false;
 
   min = 0;
@@ -23,6 +24,7 @@ export class AnsSlideComponent implements OnInit {
 
     this.disabled = false;
     this.sendEnabled = false;
+    this.maxMinDisplayed = false;
   
     this.min = 0;
     this.max = 0;
@@ -31,6 +33,15 @@ export class AnsSlideComponent implements OnInit {
     this.max = Math.max.apply(Math, this.answersToDisplay.answers.map(function(o) { return o.order; }));
     this.min = Math.min.apply(Math, this.answersToDisplay.answers.map(function(o) { return o.order; }));
     this.currentValue = this.answersToDisplay.answers.length/2 + 0.5; 
+    console.log(this.answersToDisplay);
+
+    this.answersToDisplay.answers.sort((a, b) => (a.order > b.order) ? 1 : -1);
+
+    if(this.answersToDisplay.answers[0] && this.answersToDisplay.answers[0].text !='' 
+    && this.answersToDisplay.answers[this.answersToDisplay.answers.length-1].text !='' 
+    && this.answersToDisplay.answers[1].text ==''){
+      this.maxMinDisplayed = true;
+    }
 
   }
 
@@ -43,13 +54,18 @@ export class AnsSlideComponent implements OnInit {
   }
 
   sendAnswers() {
+
+    let valueToBeDisplayed = this.selectedAnswer.order + "/" + this.answersToDisplay.answers.length;
+    if(this.selectedAnswer.text != ''){
+      valueToBeDisplayed = this.selectedAnswer.text;
+    }
     this.sendAnswer.emit({
       type: "multiple",
       visualization: "option",
       block: this.selectedAnswer,
       blockId: this.answersToDisplay.questionId,
       toSend: this.selectedAnswer.order,
-      text: this.selectedAnswer.text //value to be displayed
+      text: valueToBeDisplayed //value to be displayed
     });
   }
 }
