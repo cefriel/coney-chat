@@ -197,6 +197,14 @@ ul {
   display: inherit;
 }
 
+#max-answers-text{
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  margin-top: -.5rem;
+}
+
 .placeholder-image{
   height: auto;
   width: 40px;

@@ -168,7 +168,9 @@
         </app-ans-select>
       </div>
       <div *ngIf="answersToDisplay.visualization == 'checkbox'" class="input-inside">
-        <app-ans-checkbox [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer($event)">
+        <app-ans-checkbox [answersToDisplay]="answersToDisplay" 
+        [maxAnswersText]="chatTranslatedText.maxAnswers"
+        (sendAnswer)="sendAnswer($event)">
         </app-ans-checkbox>
       </div>
       <!--subtype is enough, visualization is sorted in the component-->

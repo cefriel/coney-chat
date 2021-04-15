@@ -1,6 +1,6 @@
 <div class="full-width center text-center">
-    <h3 *ngIf="selectedAnswer!=undefined" style="margin-top: .5rem; margin-bottom: 0;">{{selectedAnswer.text}}</h3>
-    <p *ngIf="selectedAnswer==undefined" style="margin-top: .5rem; font-weight: 500;">Slide</p>
+    <h3 *ngIf="selectedAnswer!=undefined && !maxMinDisplayed" style="margin-top: .5rem; margin-bottom: 0;">{{selectedAnswer.text}}</h3>
+    <p *ngIf="selectedAnswer==undefined && !maxMinDisplayed" style="margin-top: .5rem; font-weight: 500;">Slide</p>
 </div>
 <div *ngIf="maxMinDisplayed" 
         class="full-width text-center" style="    display: flex;

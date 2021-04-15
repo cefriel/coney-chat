@@ -56,7 +56,7 @@ export class AnsSlideComponent implements OnInit {
   sendAnswers() {
 
     let valueToBeDisplayed = this.selectedAnswer.order + "/" + this.answersToDisplay.answers.length;
-    if(this.selectedAnswer.text != ''){
+    if(!this.maxMinDisplayed && this.selectedAnswer.text != ''){
       valueToBeDisplayed = this.selectedAnswer.text;
     }
     this.sendAnswer.emit({

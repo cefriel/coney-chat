@@ -14,6 +14,7 @@ export class AnsSelectComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.answersToDisplay.answers.sort((a, b) => (a.order > b.order) ? 1 : -1);
   }
 
   sendAnswers() {

@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class AnsCheckboxComponent implements OnInit {
   @Input() answersToDisplay: any;
+  @Input() maxAnswersText: any;
   @Output() sendAnswer = new EventEmitter<any>();
   
   checked = true;
@@ -36,6 +37,7 @@ export class AnsCheckboxComponent implements OnInit {
       );
       this.maxAnswers = this.answersToDisplay.answers[i].maxAnswers;
     }
+    this.maxAnswersText = this.maxAnswersText.replace("**", ""+this.maxAnswers);
   }
 
   /**

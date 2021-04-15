@@ -20,6 +20,7 @@ export enum ENUM_IT_STRINGS {
     noSurveyChosenText = "Nessuna conversatione selezionata",
     surveyAlreadyCompetedText = "Hai già compilato questo questionario",
     noPublishedSurvey = "Mi spiace, non ho trovato nessun questionario disponibile",
+    maxAnswers = "Massimo ** risposte"
 }
 
 export enum ENUM_EN_STRINGS {
@@ -68,6 +69,7 @@ export enum ENUM_FR_STRINGS {
     noSurveyChosenText = "No survey was chosen",
     surveyAlreadyCompetedText = "You have already completed this survey",
     noPublishedSurvey = "Sorry, I couldn't find any available surveys",
+    maxAnswers = "Max ** answers"
 }
 
 export enum ENUM_EL_STRINGS {
@@ -92,6 +94,7 @@ export enum ENUM_EL_STRINGS {
     noSurveyChosenText = "No survey was chosen",
     surveyAlreadyCompetedText = "You have already completed this survey",
     noPublishedSurvey = "Sorry, I couldn't find any available surveys",
+    maxAnswers = "Max ** answers"
 }
 
 export enum ENUM_FI_STRINGS {
@@ -116,6 +119,7 @@ export enum ENUM_FI_STRINGS {
     noSurveyChosenText = "No survey was chosen",
     surveyAlreadyCompetedText = "You have already completed this survey",
     noPublishedSurvey = "Sorry, I couldn't find any available surveys",
+    maxAnswers = "Max ** answers"
 }
 
 export enum ENUM_SK_STRINGS {
@@ -140,6 +144,7 @@ export enum ENUM_SK_STRINGS {
     noSurveyChosenText = "No survey was chosen",
     surveyAlreadyCompetedText = "You have already completed this survey",
     noPublishedSurvey = "Sorry, I couldn't find any available surveys",
+    maxAnswers = "Max ** answers"
 }
 
 export enum ENUM_CS_STRINGS {
@@ -164,6 +169,7 @@ export enum ENUM_CS_STRINGS {
     noSurveyChosenText = "No survey was chosen",
     surveyAlreadyCompetedText = "You have already completed this survey",
     noPublishedSurvey = "Sorry, I couldn't find any available surveys",
+    maxAnswers = "Max ** answers"
 }
 
 export enum ENUM_ES_STRINGS {
@@ -188,6 +194,7 @@ export enum ENUM_ES_STRINGS {
     noSurveyChosenText = "No survey was chosen",
     surveyAlreadyCompetedText = "You have already completed this survey",
     noPublishedSurvey = "Sorry, I couldn't find any available surveys",
+    maxAnswers = "Max ** answers"
 }
 
 export enum ENUM_DE_STRINGS {
@@ -212,6 +219,7 @@ export enum ENUM_DE_STRINGS {
     noSurveyChosenText = "No survey was chosen",
     surveyAlreadyCompetedText = "You have already completed this survey",
     noPublishedSurvey = "Sorry, I couldn't find any available surveys",
+    maxAnswers = "Max ** answers"
 }
 
 export enum ENUM_UK_STRINGS {
@@ -236,6 +244,7 @@ export enum ENUM_UK_STRINGS {
     noSurveyChosenText = "No survey was chosen",
     surveyAlreadyCompetedText = "You have already completed this survey",
     noPublishedSurvey = "Sorry, I couldn't find any available surveys",
+    maxAnswers = "Max ** answers"
 }
 
 export enum ENUM_HR_STRINGS {
@@ -260,6 +269,7 @@ export enum ENUM_HR_STRINGS {
     noSurveyChosenText = "No survey was chosen",
     surveyAlreadyCompetedText = "You have already completed this survey",
     noPublishedSurvey = "Sorry, I couldn't find any available surveys",
+    maxAnswers = "Max ** answers"
 }
 
 export enum ENUM_PT_STRINGS {
@@ -284,4 +294,5 @@ export enum ENUM_PT_STRINGS {
     noSurveyChosenText = "No survey was chosen",
     surveyAlreadyCompetedText = "You have already completed this survey",
     noPublishedSurvey = "Sorry, I couldn't find any available surveys",
+    maxAnswers = "Max ** answers"
 }

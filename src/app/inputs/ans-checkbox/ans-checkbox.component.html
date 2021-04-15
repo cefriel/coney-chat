@@ -1,26 +1,35 @@
 <div class="full-width" style="padding: 1em;">
-    <div class="row-center center">
-        <div class="center" style="max-width:500px; width: auto!important; max-height: 26vh;  overflow-y: auto;">
+    <div *ngIf="maxAnswers!=0" style="" id="max-answers-text">
+        {{maxAnswersText}}
+    </div>
+  <div class="row-center center">
+    <div class="center" style="max-width:500px; width: auto!important; max-height: 26vh;  overflow-y: auto;">
 
-    <div *ngFor="let answer of answerList; index as i" style="width: 100%; text-align: left; margin-bottom: .5rem;">
+      <div *ngFor="let answer of answerList; index as i" style="width: 100%; text-align: left; margin-bottom: .5rem;">
         <!--normal box-->
         <label nz-checkbox *ngIf="answer.type == 'normal'" [(ngModel)]="answer.checked"
-            [disabled]="disabled || (maxReached && !answer.checked)" (ngModelChange)="updateAllChecked('normal', i)">{{answer.text}}</label>
+          [disabled]="disabled || (maxReached && !answer.checked)"
+          (ngModelChange)="updateAllChecked('normal', i)">{{answer.text}}</label>
         <!--none box-->
         <label nz-checkbox *ngIf="answer.type == 'none'" [(ngModel)]="answer.checked"
-            (ngModelChange)="updateAllChecked('none', i)">{{answer.text}}</label>
+          (ngModelChange)="updateAllChecked('none', i)">{{answer.text}}</label>
         <!--other box-->
-        <label nz-checkbox *ngIf="answer.type == 'other'" [(ngModel)]="answer.checked" [disabled]="disabled  || (maxReached && !answer.checked)" (ngModelChange)="updateAllChecked('other', i)"></label>
-        <input nz-input *ngIf="answer.type == 'other'" [placeholder]="answer.text" [(ngModel)]="openAnswer" [disabled]="disabled || (maxReached && !answer.checked)" 
-        style="margin-left: 8px; border: none; border-bottom: 1px solid lightgray; outline: none!important;" nzBorderless />
+        <label nz-checkbox *ngIf="answer.type == 'other'" [(ngModel)]="answer.checked"
+          [disabled]="disabled  || (maxReached && !answer.checked)"
+          (ngModelChange)="updateAllChecked('other', i)"></label>
+        <input nz-input *ngIf="answer.type == 'other'" [placeholder]="answer.text" [(ngModel)]="openAnswer"
+          [disabled]="disabled || (maxReached && !answer.checked)"
+          style="margin-left: 8px; border: none; border-bottom: 1px solid lightgray; outline: none!important;"
+          nzBorderless />
+      </div>
     </div>
+  </div>
 </div>
-</div></div>
 <div class="full-width center text-center" style="margin-bottom: 1rem;">
-    <button *ngIf="sendEnabled" nz-button (click)="sendAnswers()"  class="send-btn" nzShape="circle">
-        <img src="./assets/icons/ic_send.svg" style="height: 1rem;">
-    </button>
-    <button *ngIf="!sendEnabled" nz-button disabled class="send-btn-disabled" nzShape="circle">
-        <img src="./assets/icons/ic_send_disabled.svg" style="height: 1rem;">
-    </button>
+  <button *ngIf="sendEnabled" nz-button (click)="sendAnswers()" class="send-btn" nzShape="circle">
+    <img src="./assets/icons/ic_send.svg" style="height: 1rem;">
+  </button>
+  <button *ngIf="!sendEnabled" nz-button disabled class="send-btn-disabled" nzShape="circle">
+    <img src="./assets/icons/ic_send_disabled.svg" style="height: 1rem;">
+  </button>
 </div>
