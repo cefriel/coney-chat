@@ -1,0 +1,49 @@
+<div class="full" *ngIf="!showRestart" id="chat-full"
+  style="position:relative; background: url(./assets/pattern-coney-light.png);">
+
+
+  <chat-side-panel *ngIf="deviceWidth > 1000" [compilation]="compilation" [surveyProgress]="surveyProgress">
+  </chat-side-panel>
+
+
+  <!--main screen application-->
+  <div class="chat-app">
+
+    <!--undo button for desktop-->
+    <button nz-button nzType="primary" nzShape="circle" *ngIf="deviceWidth > 1000" id="floatUndo"
+      (click)="undoLastAnswer()" [disabled]="!undoEnabled || messageLoading" style="top: 1rem">
+      <img *ngIf="undoEnabled && !messageLoading" src="./assets/icons/ic_redo.svg"
+        style="height: 1rem; width: auto; margin-top: -.2rem;">
+      <img *ngIf="!undoEnabled || messageLoading" src="./assets/icons/ic_redo_disabled.svg"
+        style="height: 1rem; width: auto; margin-top: -.2rem;">
+    </button>
+
+
+    <!--navbar on small screen/mobile-->
+    <chat-navbar [surveyProgress]="surveyProgress" 
+    [undoEnabled]="undoEnabled"
+    [!messageLoading]="!messageLoading"
+    [compilation]="compilation" *ngIf="deviceWidth <= 1000">
+    </chat-navbar>
+
+    <!--Main content of the chat, messages list-->
+    <chat-content id="chat-content" [loading]="loading" [messageLoading]="messageLoading" [disableScrollDown]="disableScrollDown"
+      [displayedMessages]="displayedMessages" [errorMessage]="errorMessage" [recreatingConv]="recreatingConv">
+    </chat-content>
+
+
+    <!--input area based on viz-->
+    <chat-input-box [answersToDisplay]="answersToDisplay" [language]="compilation.language.tag"
+    [conversationOver]="conversationOver" (sendAnswer)="sendAnswer($event)"
+      (closeConversation)="closeConversation()"></chat-input-box>
+
+  </div>
+
+
+</div>
+
+
+
+<!--restart or continue-->
+<restart-popup *ngIf="showRestart" [language]="compilation.language.tag" (restartChoice)="restartChoice($event)">
+</restart-popup>

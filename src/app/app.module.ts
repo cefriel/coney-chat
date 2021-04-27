@@ -14,23 +14,27 @@ import { AngularResizedEventModule } from 'angular-resize-event';
 import { AngularFittextModule } from 'angular-fittext';
 import { PinchZoomModule } from 'ngx-pinch-zoom';
 
-import { StartUiComponent } from './screens/start-ui/start-ui.component';
-import { EndUiComponent } from './screens/end-ui/end-ui.component';
-import { ChatUiComponent } from './screens/chat-ui/chat-ui.component';
-import { RestartComponent } from './screens/restart-ui/restart-ui.component';
+import { StartInterfaceComponent } from './start-interface/start-interface.component';
+import { EndUiComponent } from './end-interface/end-interface.component';
 
-import { AnsCheckboxComponent } from './inputs/ans-checkbox/ans-checkbox.component';
-import { AnsEmojiComponent } from './inputs/ans-emoji/ans-emoji.component';
-import { AnsOptionComponent } from './inputs/ans-option/ans-option.component';
-import { AnsStarComponent } from './inputs/ans-star/ans-star.component';
-import { AnsSelectComponent } from './inputs/ans-select/ans-select.component';
-import { AnsSlideComponent } from './inputs/ans-slide/ans-slide.component';
-import { AnsOpenComponent } from './inputs/ans-open/ans-open.component';
+import { ChatComponent } from './chat/chat.component';
+import { ChatInputBoxComponent } from './chat/chat-input-box/chat-input-box.component';
+import { ChatContentComponent } from './chat/chat-content/chat-content.component';
+import { ChatSidePanelComponent } from './chat/chat-side-panel/chat-side-panel.component';
+import { ChatNavbarComponent } from './chat/chat-navbar/chat-navbar.component';
+import { RestartComponent } from './chat/restart-popup/restart-popup.component';
 
-import { CookiesComponent } from './cookies/cookies.component';
-import { BackendService } from './service/backend.service';
-import { HelperService } from './service/utils.service';
-import { SetupService } from './service/setup.service';
+import { AnsCheckboxComponent } from './chat/chat-input-box/ans-checkbox/ans-checkbox.component';
+import { AnsEmojiComponent } from './chat/chat-input-box/ans-emoji/ans-emoji.component';
+import { AnsOptionComponent } from './chat/chat-input-box/ans-option/ans-option.component';
+import { AnsStarComponent } from './chat/chat-input-box/ans-star/ans-star.component';
+import { AnsSelectComponent } from './chat/chat-input-box/ans-select/ans-select.component';
+import { AnsSlideComponent } from './chat/chat-input-box/ans-slide/ans-slide.component';
+import { AnsOpenComponent } from './chat/chat-input-box/ans-open/ans-open.component';
+
+import { BackendService } from './chat/chat.service';
+import { HelperService } from './app.service';
+import { SetupService } from './start-interface/start-interface.service';
 
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
@@ -51,9 +55,13 @@ registerLocaleData(it);
 @NgModule({
   declarations: [
     AppComponent,
-    StartUiComponent,
+    StartInterfaceComponent,
     EndUiComponent,
-    ChatUiComponent,
+    ChatComponent,
+    ChatContentComponent,
+    ChatInputBoxComponent,
+    ChatSidePanelComponent,
+    ChatNavbarComponent,
     AnsCheckboxComponent,
     AnsEmojiComponent,
     AnsOptionComponent,
@@ -61,7 +69,6 @@ registerLocaleData(it);
     AnsSelectComponent,
     AnsSlideComponent,
     AnsOpenComponent,
-    CookiesComponent,
     RestartComponent
   ],
   imports: [

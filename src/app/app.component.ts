@@ -1,9 +1,9 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { Params, ActivatedRoute, ActivationEnd, Router, NavigationEnd } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
-import { BackendService } from './service/backend.service';
-import { HelperService } from './service/utils.service';
-import { SetupService } from './service/setup.service';
+import { BackendService } from './chat/chat.service';
+import { HelperService } from './app.service';
+import { SetupService } from './start-interface/start-interface.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { trigger, style, animate, transition } from '@angular/animations';
@@ -18,7 +18,7 @@ This is the component that starts the process
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
   animations: [
     trigger(
       'fadeAnimation', [
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
   //cookies consent is not required at this moment by the GDPR since we only store technical cookies.
   cookies = false;
 
-  constructor(private backend: BackendService,
+  constructor(
     private convService: SetupService,
     private cookieService: CookieService) {
     this.loading = true;
@@ -59,10 +59,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    if (this.cookieService.get('cco') === "true") {
-      this.hideBanner(undefined);
-    }
 
     this.error = "";
     this.convService.checkQueryParams();
@@ -112,31 +108,4 @@ export class AppComponent implements OnInit {
     this.step = 3;
   }
 
-
-
-  cookieReadMorePressed() {
-    /* console.log(this.languageValue);
-     const dialogRef = this.dialog.open(CookieConsentComponent, {
-       width: '400px',
-       maxHeight: '90vh',
-       data: {
-         lang: this.languageValue.tag
-       }
-     });
-     dialogRef.afterClosed().subscribe(res => {
-       if (res != undefined && res == "agree") {
-         this.cookieService.set('cco', "true");
-         this.hideBanner(undefined);
-       }
-     });*/
-  }
-
-  hideBanner(type: any) {
-
-    this.cookies = false;
-
-    if (type != undefined) {
-      this.cookieService.set('cco', "true");
-    }
-  }
 }

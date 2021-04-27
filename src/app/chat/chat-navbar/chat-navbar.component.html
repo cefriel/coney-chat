@@ -1,0 +1,27 @@
+<div class="chat-navbar">
+    <div class="row full-width" style="position: relative">
+
+    <button nz-button nzShape="circle" id="chatLogo">
+        <img [src]="compilation.logo" style="height: 1rem; width: auto; margin-top: -.2rem;">
+    </button>
+
+    <h3 id="chatTitle"> <span fittext [minFontSize]="12" [maxFontSize]="16">{{compilation.language.title}}</span>
+    </h3>
+
+    <!--undo button for mobile-->
+    <button nz-button nzType="primary" nzShape="circle" id="floatUndo" (click)="undoLastAnswer.emit()"
+        [disabled]="!undoEnabled || messageLoading">
+        <img *ngIf="undoEnabled && !messageLoading" src="./assets/icons/ic_redo.svg"
+        style="height: 1rem; width: auto; margin-top: -.2rem;">
+        <img *ngIf="!undoEnabled || messageLoading" src="./assets/icons/ic_redo_disabled.svg"
+        style="height: 1rem; width: auto; margin-top: -.2rem;">
+    </button>
+    </div>
+
+    <div style="position: absolute; bottom: -.5rem; left: 0rem; right: 0rem;">
+    <div style="display: block; width: 100%;">
+        <nz-progress [nzPercent]="surveyProgress" class="margin:0" [nzShowInfo]="false" nzSize="small"></nz-progress>
+    </div>
+    </div>
+
+</div>

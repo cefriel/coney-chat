@@ -50,30 +50,26 @@
 
   <ng-template #done>
 
-
     <!--start screen-->
     <div *ngIf="step==1" class="inner-container" [@fadeAnimation]>
       <div class="screen-container full">
-        <app-start-ui [setup]="setup" (startSurvey)="startSurvey($event)"></app-start-ui>
+        <start-interface [setup]="setup" (startSurvey)="startSurvey($event)"></start-interface>
       </div>
     </div>
 
     <!--chat screen-->
     <div *ngIf="step==2" class="inner-container" [@fadeAnimation]>
       <div class="screen-container full">
-        <app-chat-ui [compilation]="compilation" (conversationFinished)="endSurvey($event)"></app-chat-ui>
+        <app-chat [compilation]="compilation" (conversationFinished)="endSurvey($event)"></app-chat>
       </div>
     </div>
 
     <!--end screen-->
     <div *ngIf="step==3" class="inner-container" [@fadeAnimation]>
       <div class="screen-container full">
-        <app-end-ui></app-end-ui>
+        <end-interface></end-interface>
       </div>
     </div>
   </ng-template>
 
-
-
-  <!-- NOT NEEDED FOR NOW <app-cookies *ngIf="cookies"></app-cookies>-->
 </div>

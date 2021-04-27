@@ -1,0 +1,40 @@
+<div id="input-area" *ngIf="answersToDisplay.visualization" [@inputAnimation]>
+  <div *ngIf="answersToDisplay.visualization == 'star'" class="input-inside">
+    <ans-star-input [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer.emit($event)">
+    </ans-star-input>
+  </div>
+  <div *ngIf="answersToDisplay.visualization == 'options'" class="input-inside">
+    <ans-option-input [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer.emit($event)">
+    </ans-option-input>
+  </div>
+  <div *ngIf="answersToDisplay.visualization == 'emoji'" class="input-inside">
+    <ans-emoji-input [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer.emit($event)">
+    </ans-emoji-input>
+  </div>
+  <div *ngIf="answersToDisplay.visualization == 'slider'" class="input-inside">
+    <ans-slide-input [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer.emit($event)">
+    </ans-slide-input>
+  </div>
+  <div *ngIf="answersToDisplay.visualization == 'select'" class="input-inside">
+    <ans-select-input [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer.emit($event)">
+    </ans-select-input>
+  </div>
+  <div *ngIf="answersToDisplay.visualization == 'checkbox'" class="input-inside">
+    <ans-checkbox-input [answersToDisplay]="answersToDisplay" [maxAnswersText]="maxAnswersText"
+      (sendAnswer)="sendAnswer.emit($event)">
+    </ans-checkbox-input>
+  </div>
+  <!--subtype is enough, visualization is sorted in the component-->
+  <div *ngIf="answersToDisplay.subtype == 'single'" class="input-inside">
+    <ans-open-input [answersToDisplay]="answersToDisplay" (sendAnswer)="sendAnswer.emit($event)"></ans-open-input>
+  </div>
+</div>
+
+
+<div id="input-area" *ngIf="conversationOver" [@inputAnimation]>
+  <div>
+    <div class="full-width">
+      <button nz-button nzType="primary" [nzSize]="'large'" (click)="closeConversation.emit()" nzBlock>Submit</button>
+    </div>
+  </div>
+</div>

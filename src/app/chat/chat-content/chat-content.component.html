@@ -1,0 +1,68 @@
+    <!--chat content, message list and loading-->
+    <div #scrollMe (scroll)="onScroll()" id="chat-container" (resized)="onResize($event)">
+
+      <!--messages-->
+      <ul #messagesList id="messagesList">
+
+        <!--something went wrong-->
+        <p *ngIf="errorMessage!=''" class="error-mess" style="max-width: 66%;">{{errorMessage}} 😞</p>
+
+        <li *ngFor="let item of displayedMessages" [ngClass]="{
+            'answer': (item.type =='Answer' || item.type == 'AnswerCont'),
+            'message': (item.type != 'Answer' && item.type != 'AnswerCont')}">
+
+          <p *ngIf="item.subtype == 'link'">
+            <a [href]='item.url' target='_blank' class='msg-link'>{{item.text}}</a>
+          </p>
+
+          <div *ngIf="item.subtype == 'imageUrl'" class="msg-image-container">
+            <img src="./assets/icons/ic_image.svg" class="placeholder-image">
+            <img [src]="item.imageUrl" class="msg-image" (click)="this.showPhotoDialog(item.imageUrl)"
+              (load)="imageLoaded($event)">
+          </div>
+
+          <p *ngIf="item.type == 'Question' || (item.subtype == 'text')">
+            {{item.text}}
+          </p>
+
+          <p *ngIf="item.type=='AnswerCont'">
+            <span *ngIf="item.text==''">{{item.value}}</span>
+            <span *ngIf="item.text!=''">{{item.text}}</span>
+          </p>
+
+          <!--STANDARD ANSWER-->
+          <div *ngIf="item.type == 'Answer' && item.text.includes('ul')" [innerHtml]="item.text">
+            
+          </div>
+          <p *ngIf="item.type == 'Answer' && !item.text.includes('ul')">
+            {{item.text}}
+          </p>
+
+        </li>
+
+      </ul>
+
+      <!--loading message-->
+      <div class="row message" style="margin-left: 1rem; margin-top: -1rem; margin-bottom: 2rem;"
+        *ngIf="messageLoading || recreatingConv">
+        <div class="loading-dots">
+          <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+
+      <!--modal for photos-->
+      <nz-modal [(nzVisible)]="isPicModalVisible" [nzContent]="modalContent" [nzFooter]="null"
+        (nzOnCancel)="handleCancel()" nzCentered>
+        <ng-template #modalContent>
+          <pinch-zoom overflow="visible">
+            <img [src]="openPicture" id="openPic" style="cursor: pointer;">
+          </pinch-zoom>
+        </ng-template>
+      </nz-modal>
+
+    </div>

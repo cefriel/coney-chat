@@ -1,0 +1,39 @@
+<div id="desktop-banner">
+
+
+  <button nz-button nzType="primary" nzShape="circle" id="panel-circle">
+    <img [src]="compilation.logo" style="max-width: 75%; max-height: 75%;">
+  </button>
+
+  <h1 id="chatTitle">
+    {{compilation.language.title}}
+  </h1>
+
+  <!--Preview-->
+  <div *ngIf="compilation.userId=='preview' && compilation.meta1 != 'embedded-demo'" id="desktop-prog">
+    <h2>PREVIEW</h2>
+    <p><i>Answers will not be saved</i></p>
+  </div>
+
+  <!--progress-->
+  <h3 id="progressText">
+    Progress:</h3>
+  <div class="row center" style="margin-top: 0rem;">
+    <div style="width: 250px; display: block;">
+      <nz-progress [nzPercent]="surveyProgress" class="margin: 3rem 0"></nz-progress>
+    </div>
+  </div>
+
+  <div class="contact-up"></div>
+
+  <span style="position: absolute; bottom: 4rem; left: 1rem; right: 1rem; font-weight: 600; ">
+    Want to know more about Coney?
+    <a style="text-decoration: underline;" target="_blank" href="https://coney.cefriel.com/">Here!</a>
+  </span>
+
+  <span style="position: absolute; bottom: 1rem; left: 1rem; right: 1rem; font-weight: 500; color: #585858;">
+    Developed with ❤️ by Cefriel
+  </span>
+
+
+</div>
